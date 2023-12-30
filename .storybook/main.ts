@@ -15,11 +15,6 @@ const config: StorybookConfig = {
   },
   webpackFinal: async (config) => {
     if (config.resolve) {
-      config.resolve.fallback = {
-        ...config.resolve.fallback,
-        os: require.resolve("os-browserify/browser"),
-      };
-
       config.resolve.alias = {
         ...config.resolve.alias,
         "@/utils": path.resolve(__dirname, "../src/utils"),
