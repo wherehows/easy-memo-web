@@ -58,7 +58,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Script src="https://kit.fontawesome.com/48e58babbf.js" />
-      <body className={}>{children}</body>
+      <body className={appleGothic.className}>{children}</body>
     </html>
   );
 }
