@@ -17,7 +17,7 @@ const WritePage = () => {
     <>
       <Header>
         <Header.LeftOption option={{ back: true }} />
-        <Header.RightOption option={{ save: true }} />
+        <Header.RightOption option={{ share: true, save: true }} />
       </Header>
       <main className="flex flex-col grow pt-[8px] pb-[16px] px-[24px]">
         <div className="flex flex-col">
