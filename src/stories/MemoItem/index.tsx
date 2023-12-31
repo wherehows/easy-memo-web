@@ -9,7 +9,7 @@ interface MemoItemProps {
 const MemoItem = ({ id, title, date }: MemoItemProps) => {
   return (
     <>
-      <Link href={`/memo/${id}`}>
+      <Link href={`/detail/${id}`}>
         <h2>{title}</h2>
       </Link>
       <time dateTime={date} className="text-gray-400">
