@@ -1,4 +1,5 @@
 import { IconButtonOption, XOR } from "@/types/common";
+import Link from "next/link";
 
 type RightOptionProps = XOR<
   {
@@ -12,6 +13,8 @@ type RightOptionProps = XOR<
       save?: IconButtonOption;
       remove?: IconButtonOption;
       allSelection?: IconButtonOption;
+      compile?: IconButtonOption;
+      write?: IconButtonOption;
     };
   }
 >;
@@ -22,7 +25,8 @@ const RightOption = ({ text, option }: RightOptionProps) => {
   }
 
   if (option) {
-    const { search, menu, save, remove, allSelection, filter } = option;
+    const { search, menu, write, save, compile, remove, allSelection, filter } =
+      option;
 
     const Search = search && (
       <button>
@@ -41,13 +45,15 @@ const RightOption = ({ text, option }: RightOptionProps) => {
     );
     const AllSelection = allSelection && <button>전체 선택</button>;
     const Remove = remove && <button>삭제</button>;
+    const Compile = compile && <button>편집</button>;
+    const Write = write && <Link href="/write">작성</Link>;
 
     const saveDisabled = save && typeof save !== "boolean" && !!save.disabled;
     const Save = save && <button disabled={saveDisabled}>저장</button>;
 
     return (
       <div className="flex gap-[18px]">
-        {[Search, Filter, Menu, Save, AllSelection, Remove]}
+        {[Search, Filter, Menu, Compile, Save, Write, AllSelection, Remove]}
       </div>
     );
   }
