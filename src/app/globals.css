@@ -9,3 +9,9 @@ html {
 body {
   @apply h-[100%] mx-auto max-w-[600px] flex flex-col;
 }
+
+@layer components {
+  .center {
+    @apply flex justify-center items-center;
+  }
+}
