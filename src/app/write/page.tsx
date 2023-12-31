@@ -17,7 +17,6 @@ const WritePage = () => {
     <>
       <Header>
         <Header.LeftOption option={{ back: true }} />
-        <Header.MiddleText text="작성 페이지" />
         <Header.RightOption option={{ save: true }} />
       </Header>
       <main className="flex flex-col grow py-[16px] px-[24px]">
