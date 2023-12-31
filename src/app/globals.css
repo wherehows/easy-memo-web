@@ -10,6 +10,12 @@ body {
   @apply relative h-[100%] mx-auto max-w-[600px] flex flex-col;
 }
 
+@layer base {
+  li {
+    @apply list-none;
+  }
+}
+
 @layer components {
   .center {
     @apply flex justify-center items-center;
