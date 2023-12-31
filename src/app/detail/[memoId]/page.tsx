@@ -1,3 +1,5 @@
+"use client";
+
 import Header from "@/stories/Header";
 
 interface DetailPageProps {
