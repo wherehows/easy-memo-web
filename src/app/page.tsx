@@ -39,7 +39,7 @@ export default function Home() {
         <Header.RightOption option={{ compile: true, write: true }} />
       </Header>
       <main>
-        <ul className="flex flex-col gap-[16px]">
+        <ul className="flex flex-col gap-[16px] pt-[8px] pb-[16px] px-[24px]">
           {MEMO_LIST.map((memo, idx) => {
             return (
               <li key={idx}>
