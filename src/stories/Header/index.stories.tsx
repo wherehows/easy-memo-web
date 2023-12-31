@@ -22,7 +22,7 @@ export const Index = {
         <div className="relative">
           <Header>
             <Header.LeftOption option={{ back: true }} />
-            <Header.MiddleText text="저장 페이지" />
+            <Header.MiddleText text="작성 페이지" />
             <Header.RightOption option={{ save: true }} />
           </Header>
         </div>
