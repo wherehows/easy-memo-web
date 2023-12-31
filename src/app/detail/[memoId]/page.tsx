@@ -12,7 +12,6 @@ const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
       <Header>
         <Header>
           <Header.LeftOption option={{ back: true }} />
-          <Header.MiddleText text="상세 페이지" />
           <Header.RightOption option={{ save: true }} />
         </Header>
       </Header>

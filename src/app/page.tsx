@@ -1,5 +1,4 @@
 import Header from "@/stories/Header";
-import Link from "next/link";
 import MemoItem from "@/stories/MemoItem";
 
 const MEMO_LIST = [
@@ -35,21 +34,12 @@ const MEMO_LIST = [
 export default function Home() {
   return (
     <>
-      <Link
-        href="/write"
-        className="absolute rounded-[50%] bg-green-500 w-[50px] h-[50px] center right-[20px] bottom-[20px] height-[20px]"
-      >
-        <i className="fa-solid fa-pencil text-white text-[24px]"></i>
-      </Link>
       <Header>
         <Header.LeftOption logo />
-        <Header.MiddleText text="메인 페이지" />
-        <Header.RightOption
-          option={{ search: true, filter: true, menu: true }}
-        />
+        <Header.RightOption option={{ compile: true, write: true }} />
       </Header>
       <main>
-        <ul className="flex flex-col gap-[16px]">
+        <ul className="flex flex-col gap-[16px] pt-[8px] pb-[16px] px-[24px]">
           {MEMO_LIST.map((memo, idx) => {
             return (
               <li key={idx}>

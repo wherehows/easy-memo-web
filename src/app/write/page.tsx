@@ -17,17 +17,16 @@ const WritePage = () => {
     <>
       <Header>
         <Header.LeftOption option={{ back: true }} />
-        <Header.MiddleText text="작성 페이지" />
-        <Header.RightOption option={{ save: true }} />
+        <Header.RightOption option={{ share: true, save: true }} />
       </Header>
-      <main className="flex flex-col grow py-[16px] px-[24px]">
+      <main className="flex flex-col grow pt-[8px] pb-[16px] px-[24px]">
         <div className="flex flex-col">
           <label htmlFor="title">제목</label>
           <input
             id="title"
             type="text"
             maxLength={50}
-            className="text-black p-[8px]"
+            className="text-black p-[8px] mb-[16px]"
             onChange={debounce(handleChangeTitle, 500)}
           />
         </div>
