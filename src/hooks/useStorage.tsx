@@ -1,25 +1,18 @@
+import { TempMemoryType } from "@/utils/storage";
 import { useState } from "react";
 
 export const useLocalStorage = <T,>(key: string, defaultValue: T) => {
-  return useStorage(
-    key,
-    defaultValue,
-    supports_html5_storage() ? window.localStorage : new TempMemory()
-  );
+  return useStorage(key, defaultValue, localStorage);
 };
 
 export const useSessionStorage = <T,>(key: string, defaultValue: T) => {
-  return useStorage(
-    key,
-    defaultValue,
-    supports_html5_storage() ? window.sessionStorage : new TempMemory()
-  );
+  return useStorage(key, defaultValue, localStorage);
 };
 
 const useStorage = <T,>(
   key: string,
   defaultValue: T,
-  storageObject: Storage | TempMemory
+  storageObject: Storage | TempMemoryType
 ) => {
   const [value, _setValue] = useState(() => {
     const jsonValue = storageObject.getItem(key);
@@ -45,28 +38,3 @@ const useStorage = <T,>(
 
   return [value, setValue, remove];
 };
-
-const supports_html5_storage = () => {
-  try {
-    return "localStorage" in window && window["localStorage"] !== null;
-  } catch (e) {
-    return false;
-  }
-};
-
-class TempMemory {
-  private cache: { [key: string]: string | undefined } = {};
-
-  constructor() {
-    this.cache = {};
-  }
-  setItem(cacheKey: string, data: string) {
-    this.cache[cacheKey] = data;
-  }
-  getItem(cacheKey: string) {
-    return this.cache[cacheKey];
-  }
-  removeItem(cacheKey: string) {
-    this.cache[cacheKey] = undefined;
-  }
-}
