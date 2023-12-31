@@ -8,7 +8,7 @@ export default function Home() {
         href="/write"
         className="absolute rounded-[50%] bg-green-500 w-[50px] h-[50px] center right-[20px] bottom-[20px] height-[20px]"
       >
-        <i className="fa-solid fa-plus text-white text-[24px]" />
+        <i className="fa-solid fa-pencil text-white text-[24px]"></i>
       </Link>
       <Header>
         <Header.LeftOption logo />
