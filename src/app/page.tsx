@@ -1,5 +1,6 @@
 import Header from "@/stories/Header";
 import MemoItem from "@/stories/MemoItem";
+import { useState } from "react";
 
 const MEMO_LIST = [
   {
@@ -32,11 +33,13 @@ const MEMO_LIST = [
 ];
 
 export default function Home() {
+  const [isEditing, setIsEditing] = useState(false);
+
   return (
     <>
       <Header>
         <Header.LeftOption empty />
-        <Header.RightOption option={{ edit: true, write: true }} />
+        <Header.RightOption option={{ edit: {}, write: true }} />
       </Header>
       <main>
         <ul className="flex flex-col gap-[16px] pt-[8px] pb-[16px] px-[24px]">
