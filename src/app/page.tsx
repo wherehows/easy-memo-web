@@ -36,7 +36,7 @@ export default function Home() {
     <>
       <Header>
         <Header.LeftOption empty />
-        <Header.RightOption option={{ compile: true, write: true }} />
+        <Header.RightOption option={{ edit: true, write: true }} />
       </Header>
       <main>
         <ul className="flex flex-col gap-[16px] pt-[8px] pb-[16px] px-[24px]">

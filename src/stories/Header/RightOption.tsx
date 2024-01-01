@@ -13,7 +13,7 @@ type RightOptionProps = XOR<
       save?: IconButtonOption;
       remove?: IconButtonOption;
       allSelection?: IconButtonOption;
-      compile?: IconButtonOption;
+      edit?: IconButtonOption;
       write?: IconButtonOption;
       share?: IconButtonOption;
     };
@@ -32,7 +32,7 @@ const RightOption = ({ text, option }: RightOptionProps) => {
       write,
       share,
       save,
-      compile,
+      edit,
       remove,
       allSelection,
       filter,
@@ -55,7 +55,7 @@ const RightOption = ({ text, option }: RightOptionProps) => {
     );
     const AllSelection = allSelection && <button>전체 선택</button>;
     const Remove = remove && <button>삭제</button>;
-    const Compile = compile && <button>편집</button>;
+    const Edit = edit && <button>편집</button>;
     const Write = write && <Link href="/write">작성</Link>;
 
     const Share = share && <button>공유</button>;
@@ -64,17 +64,7 @@ const RightOption = ({ text, option }: RightOptionProps) => {
 
     return (
       <div className="flex gap-[18px]">
-        {[
-          Search,
-          Filter,
-          Menu,
-          Share,
-          Compile,
-          Save,
-          Write,
-          AllSelection,
-          Remove,
-        ]}
+        {[Search, Filter, Menu, Share, Edit, Save, Write, AllSelection, Remove]}
       </div>
     );
   }
