@@ -2,8 +2,8 @@
 
 import Header from "@/stories/Header";
 import MemoItem from "@/stories/MemoItem";
-import { classNames } from "@/utils/helpers";
-import { useRef, useState } from "react";
+import { classNames, formatTimeDifference } from "@/utils/helpers";
+import { useState } from "react";
 
 const MEMO_LIST = [
   {
@@ -123,7 +123,7 @@ export default function Home() {
                     <label className="flex flex-col">
                       {title}
                       <time dateTime={date} className="text-gray-400">
-                        {date}
+                        {formatTimeDifference(date)}
                       </time>
                     </label>
                   </>
