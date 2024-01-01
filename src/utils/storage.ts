@@ -25,10 +25,10 @@ class TempMemory {
 
 export type TempMemoryType = TempMemory;
 
-export const localStorage = supports_html5_storage()
+export const checkedLocalStorage = supports_html5_storage()
   ? window.localStorage
   : new TempMemory();
 
-export const sessionStorage = supports_html5_storage()
+export const checkedSessionStorage = supports_html5_storage()
   ? window.sessionStorage
   : new TempMemory();

@@ -1,12 +1,16 @@
-import { TempMemoryType } from "@/utils/storage";
+import {
+  TempMemoryType,
+  checkedLocalStorage,
+  checkedSessionStorage,
+} from "@/utils/storage";
 import { useState } from "react";
 
 export const useLocalStorage = <T,>(key: string, defaultValue: T) => {
-  return useStorage(key, defaultValue, localStorage);
+  return useStorage(key, defaultValue, checkedLocalStorage);
 };
 
 export const useSessionStorage = <T,>(key: string, defaultValue: T) => {
-  return useStorage(key, defaultValue, localStorage);
+  return useStorage(key, defaultValue, checkedSessionStorage);
 };
 
 const useStorage = <T,>(
