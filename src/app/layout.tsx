@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <Script src="https://kit.fontawesome.com/48e58babbf.js" />
       <body className={appleGothic.className}>{children}</body>
     </html>
