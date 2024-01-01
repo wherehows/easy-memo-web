@@ -3,7 +3,7 @@
 import Header from "@/stories/Header";
 import MemoItem from "@/stories/MemoItem";
 import { classNames } from "@/utils/helpers";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const MEMO_LIST = [
   {
@@ -34,9 +34,19 @@ const MEMO_LIST = [
     date: "2023-09-21",
   },
 ];
+type MemoIdObject = { [id: number]: boolean };
 
 export default function Home() {
   const [isEditing, setIsEditing] = useState(false);
+
+  const [isRemoveMap, setIsRemoveMap] = useState<{
+    [id: number]: boolean;
+  }>(
+    MEMO_LIST.reduce((acc, memo) => {
+      acc[memo.id] = false;
+      return acc;
+    }, {} as MemoIdObject)
+  );
 
   return (
     <>
@@ -58,7 +68,17 @@ export default function Home() {
           <Header.RightOption
             option={{
               allSelection: {
-                onClick: () => {},
+                onClick: () => {
+                  const newState: {
+                    [id: number]: boolean;
+                  } = {};
+
+                  for (const key in isRemoveMap) {
+                    newState[key] = true;
+                  }
+
+                  setIsRemoveMap(newState);
+                },
               },
               remove: {
                 onClick: () => {},
@@ -90,7 +110,16 @@ export default function Home() {
               >
                 {isEditing ? (
                   <>
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      checked={isRemoveMap[id] || false}
+                      onChange={() =>
+                        setIsRemoveMap({
+                          ...isRemoveMap,
+                          [id]: !isRemoveMap[id],
+                        })
+                      }
+                    />
                     <label className="flex flex-col">
                       {title}
                       <time dateTime={date} className="text-gray-400">
