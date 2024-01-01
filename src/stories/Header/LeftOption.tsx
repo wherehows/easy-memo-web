@@ -16,15 +16,15 @@ type LeftOptionProps = XOR<
         close?: IconButtonOption;
       };
     },
-    { logo: boolean }
+    { empty: boolean }
   >
 >;
 
-const LeftOption = ({ logo, townSelection, option }: LeftOptionProps) => {
+const LeftOption = ({ empty, townSelection, option }: LeftOptionProps) => {
   const router = useRouter();
 
-  if (logo) {
-    return <Link href="/">로고</Link>;
+  if (empty) {
+    return <div />;
   }
 
   if (townSelection) {
