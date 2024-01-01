@@ -1,34 +1,31 @@
-import { TempMemoryType } from "@/utils/storage";
+import {
+  CheckedLocalStorageType,
+  CheckedSessionStorageType,
+  checkedLocalStorage,
+  checkedSessionStorage,
+} from "@/utils/storage";
 import { useState } from "react";
 
 export const useLocalStorage = <T,>(key: string, defaultValue: T) => {
-  return useStorage(key, defaultValue, localStorage);
+  return useStorage(key, defaultValue, checkedLocalStorage);
 };
 
 export const useSessionStorage = <T,>(key: string, defaultValue: T) => {
-  return useStorage(key, defaultValue, localStorage);
+  return useStorage(key, defaultValue, checkedSessionStorage);
 };
 
 const useStorage = <T,>(
   key: string,
   defaultValue: T,
-  storageObject: Storage | TempMemoryType
+  storageObject: CheckedLocalStorageType | CheckedSessionStorageType
 ) => {
   const [value, _setValue] = useState(() => {
-    const jsonValue = storageObject.getItem(key);
-
-    try {
-      if (jsonValue != null) return JSON.parse(jsonValue);
-    } catch (e) {
-      console.error("storage 에러 발생,", e);
-    }
-
-    return defaultValue;
+    return storageObject.getItem(key, defaultValue);
   });
 
   const setValue = (value: T) => {
     _setValue(value);
-    storageObject.setItem(key, JSON.stringify(value));
+    storageObject.setItem(key, value);
   };
 
   const remove = () => {
