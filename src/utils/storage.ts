@@ -1,4 +1,4 @@
-const supports_html5_storage = () => {
+export const supports_html5_storage = () => {
   try {
     return "localStorage" in window && window["localStorage"] !== null;
   } catch (e) {
@@ -6,29 +6,67 @@ const supports_html5_storage = () => {
   }
 };
 
-class TempMemory {
-  private cache: { [key: string]: string | undefined } = {};
+class TempMemory<T> {
+  private cache: { [key: string]: T | undefined } = {};
 
   constructor() {
     this.cache = {};
   }
-  setItem(cacheKey: string, data: string) {
-    this.cache[cacheKey] = data;
+  setItem(key: string, value: T) {
+    this.cache[key] = value;
   }
-  getItem(cacheKey: string) {
-    return this.cache[cacheKey];
+  getItem(key: string, defaultValue: T) {
+    return this.cache[key] || defaultValue;
   }
-  removeItem(cacheKey: string) {
-    this.cache[cacheKey] = undefined;
+  removeItem(key: string) {
+    this.cache[key] = undefined;
   }
 }
 
-export type TempMemoryType = TempMemory;
+export type TempMemoryType<T> = TempMemory<T>;
 
-export const checkedLocalStorage = supports_html5_storage()
-  ? window.localStorage
-  : new TempMemory();
+export const checkedLocalStorage = {
+  getItem: <T>(key: string, defaultValue: T) => {
+    const jsonValue = localStorage.getItem(key);
 
-export const checkedSessionStorage = supports_html5_storage()
-  ? window.sessionStorage
-  : new TempMemory();
+    try {
+      if (jsonValue) return JSON.parse(jsonValue);
+    } catch (error: any) {
+      alert(`저장 공간에 문제가 있어요. ${error.message}`);
+      localStorage.setItem(key, JSON.stringify(defaultValue));
+    }
+
+    return defaultValue;
+  },
+  setItem: <T>(key: string, value: T) => {
+    localStorage.setItem(key, JSON.stringify(value));
+  },
+  removeItem: (key: string) => {
+    localStorage.removeItem(key);
+  },
+} as const;
+
+export const checkedSessionStorage = {
+  getItem: <T>(key: string, defaultValue: T) => {
+    const jsonValue = sessionStorage.getItem(key);
+
+    try {
+      if (jsonValue) return JSON.parse(jsonValue);
+    } catch (error: any) {
+      alert(`저장 공간에 문제가 있어요. ${error.message}`);
+      sessionStorage.setItem(key, JSON.stringify(defaultValue));
+    }
+
+    return defaultValue;
+  },
+  setItem: <T>(key: string, value: T) => {
+    sessionStorage.setItem(key, JSON.stringify(value));
+  },
+  removeItem: (key: string) => {
+    sessionStorage.removeItem(key);
+  },
+} as const;
+
+export type CheckedLocalStorageType = typeof checkedLocalStorage;
+
+export type CheckedSessionStorageType = typeof checkedSessionStorage;

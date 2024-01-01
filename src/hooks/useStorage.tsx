@@ -1,5 +1,6 @@
 import {
-  TempMemoryType,
+  CheckedLocalStorageType,
+  CheckedSessionStorageType,
   checkedLocalStorage,
   checkedSessionStorage,
 } from "@/utils/storage";
@@ -16,23 +17,15 @@ export const useSessionStorage = <T,>(key: string, defaultValue: T) => {
 const useStorage = <T,>(
   key: string,
   defaultValue: T,
-  storageObject: Storage | TempMemoryType
+  storageObject: CheckedLocalStorageType | CheckedSessionStorageType
 ) => {
   const [value, _setValue] = useState(() => {
-    const jsonValue = storageObject.getItem(key);
-
-    try {
-      if (jsonValue != null) return JSON.parse(jsonValue);
-    } catch (e) {
-      console.error("storage 에러 발생,", e);
-    }
-
-    return defaultValue;
+    return storageObject.getItem(key, defaultValue);
   });
 
   const setValue = (value: T) => {
     _setValue(value);
-    storageObject.setItem(key, JSON.stringify(value));
+    storageObject.setItem(key, value);
   };
 
   const remove = () => {
