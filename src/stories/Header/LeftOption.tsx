@@ -6,20 +6,15 @@ import { useRouter } from "next/navigation";
 
 type LeftOptionProps = XOR<
   {
-    townSelection: boolean;
+    option: {
+      back?: IconButtonOption;
+      close?: IconButtonOption;
+    };
   },
-  XOR<
-    {
-      option: {
-        back?: IconButtonOption;
-        close?: IconButtonOption;
-      };
-    },
-    { empty: boolean }
-  >
+  { empty: boolean }
 >;
 
-const LeftOption = ({ empty, townSelection, option }: LeftOptionProps) => {
+const LeftOption = ({ empty, option }: LeftOptionProps) => {
   const router = useRouter();
 
   if (empty) {
