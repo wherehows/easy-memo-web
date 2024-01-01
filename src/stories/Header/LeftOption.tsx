@@ -11,7 +11,7 @@ type LeftOptionProps = XOR<
   XOR<
     {
       option: {
-        back?: boolean;
+        back?: IconButtonOption;
         close?: IconButtonOption;
       };
     },
@@ -29,25 +29,8 @@ const LeftOption = ({ empty, townSelection, option }: LeftOptionProps) => {
   if (option) {
     const { back, close } = option;
 
-    const Back = back && (
-      <button
-        onClick={() => {
-          router.back();
-        }}
-      >
-        뒤로가기
-      </button>
-    );
-
-    const Close = close && (
-      <button
-        onClick={() => {
-          router.back();
-        }}
-      >
-        닫기
-      </button>
-    );
+    const Back = back && <button onClick={back.onClick}>뒤로가기</button>;
+    const Close = close && <button onClick={close.onClick}>닫기</button>;
 
     return <div className="center">{[Back, Close]}</div>;
   }
