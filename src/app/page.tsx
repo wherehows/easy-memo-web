@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <>
       <Header>
-        <Header.LeftOption logo />
+        <Header.LeftOption empty />
         <Header.RightOption option={{ compile: true, write: true }} />
       </Header>
       <main>
