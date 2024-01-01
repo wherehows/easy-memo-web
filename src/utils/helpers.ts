@@ -1,3 +1,5 @@
+import { RefObject } from "react";
+
 export const classNames = (...classes: (boolean | string)[]) =>
   classes.filter(Boolean).join(" ");
 
@@ -19,3 +21,5 @@ export const debounce = <T extends (...args: any[]) => any>(
     }, delay);
   };
 };
+
+export const getRefValue = <C>(ref: RefObject<C>) => ref.current as C;
