@@ -1,7 +1,6 @@
 "use client";
 
 import { IconButtonOption, XOR } from "@/types/common";
-import Link from "next/link";
 
 import { useRouter } from "next/navigation";
 
@@ -12,6 +11,7 @@ type LeftOptionProps = XOR<
   XOR<
     {
       option: {
+        cancel?: IconButtonOption;
         back?: IconButtonOption;
         close?: IconButtonOption;
       };
@@ -32,7 +32,13 @@ const LeftOption = ({ empty, townSelection, option }: LeftOptionProps) => {
   }
 
   if (option) {
-    const { back, close } = option;
+    const { back, close, cancel } = option;
+
+    const Cancel = cancel && "onClick" in cancel && (
+      <button onClick={cancel.onClick}>
+        <i className="fa-solid fa-xmark"></i>
+      </button>
+    );
 
     const Back = back && (
       <button
@@ -54,7 +60,7 @@ const LeftOption = ({ empty, townSelection, option }: LeftOptionProps) => {
       </button>
     );
 
-    return <div className="center">{[Back, Close]}</div>;
+    return <div className="center">{[Cancel, Back, Close]}</div>;
   }
 };
 
