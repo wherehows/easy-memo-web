@@ -1,7 +1,7 @@
 import React from "react";
 import type { Preview } from "@storybook/react";
-import { appleGothic } from "../src/app/layout";
 import "../src/app/globals.css";
+import appleGothic from "../src/utils/font";
 
 const preview: Preview = {
   parameters: {
