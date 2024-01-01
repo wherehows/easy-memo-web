@@ -2,8 +2,6 @@
 
 import { IconButtonOption, XOR } from "@/types/common";
 
-import { useRouter } from "next/navigation";
-
 type LeftOptionProps = XOR<
   {
     option: {
@@ -15,8 +13,6 @@ type LeftOptionProps = XOR<
 >;
 
 const LeftOption = ({ empty, option }: LeftOptionProps) => {
-  const router = useRouter();
-
   if (empty) {
     return <div />;
   }
