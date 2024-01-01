@@ -1,5 +1,8 @@
+"use client";
+
 import Header from "@/stories/Header";
 import MemoItem from "@/stories/MemoItem";
+import { classNames } from "@/utils/helpers";
 import { useState } from "react";
 
 const MEMO_LIST = [
@@ -38,15 +41,66 @@ export default function Home() {
   return (
     <>
       <Header>
-        <Header.LeftOption empty />
-        <Header.RightOption option={{ edit: {}, write: true }} />
+        {isEditing ? (
+          <Header.LeftOption
+            option={{
+              close: {
+                onClick: () => {
+                  setIsEditing(false);
+                },
+              },
+            }}
+          />
+        ) : (
+          <Header.LeftOption empty />
+        )}
+        {isEditing ? (
+          <Header.RightOption
+            option={{
+              allSelection: {
+                onClick: () => {},
+              },
+              remove: {
+                onClick: () => {},
+              },
+            }}
+          />
+        ) : (
+          <Header.RightOption
+            option={{
+              edit: {
+                onClick: () => {
+                  setIsEditing(true);
+                },
+              },
+              write: true,
+            }}
+          />
+        )}
       </Header>
       <main>
         <ul className="flex flex-col gap-[16px] pt-[8px] pb-[16px] px-[24px]">
-          {MEMO_LIST.map((memo, idx) => {
+          {MEMO_LIST.map((memo) => {
+            const { id, title, date } = memo;
+
             return (
-              <li key={idx}>
-                <MemoItem {...memo} />
+              <li
+                key={id}
+                className={classNames(isEditing ? "flex flex-row" : "")}
+              >
+                {isEditing ? (
+                  <>
+                    <input type="checkbox" />
+                    <label className="flex flex-col">
+                      {title}
+                      <time dateTime={date} className="text-gray-400">
+                        {date}
+                      </time>
+                    </label>
+                  </>
+                ) : (
+                  <MemoItem {...memo} />
+                )}
               </li>
             );
           })}
