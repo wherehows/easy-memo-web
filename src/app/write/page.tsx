@@ -2,9 +2,12 @@
 
 import Header from "@/stories/Header";
 import { debounce } from "@/utils/helpers";
+import { useRouter } from "next/navigation";
 import { ChangeEvent } from "react";
 
 const WritePage = () => {
+  const router = useRouter();
+
   const handleChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
     localStorage.setItem("1-content", e.target.value);
   };
@@ -16,8 +19,25 @@ const WritePage = () => {
   return (
     <>
       <Header>
-        <Header.LeftOption option={{ back: true }} />
-        <Header.RightOption option={{ share: true, save: true }} />
+        <Header.LeftOption
+          option={{
+            back: {
+              onClick: () => {
+                router.back();
+              },
+            },
+          }}
+        />
+        <Header.RightOption
+          option={{
+            share: {
+              onClick: () => {},
+            },
+            save: {
+              onClick: () => {},
+            },
+          }}
+        />
       </Header>
       <main className="flex flex-col grow pt-[8px] pb-[16px] px-[24px]">
         <div className="flex flex-col">
