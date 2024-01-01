@@ -11,6 +11,7 @@ type RightOptionProps = XOR<
       remove?: IconButtonOption;
       allSelection?: IconButtonOption;
       edit?: IconButtonOption;
+      back?: boolean;
       write?: boolean;
       share?: IconButtonOption;
     };
@@ -32,7 +33,9 @@ const RightOption = ({ text, option }: RightOptionProps) => {
       <button onClick={remove.onClick}>삭제</button>
     );
 
-    const Edit = edit && "onClick" in edit && <button>편집</button>;
+    const Edit = edit && "onClick" in edit && (
+      <button onClick={edit.onClick}>편집</button>
+    );
     const Write = write && <Link href="/write">작성</Link>;
 
     const Share = share && "onClick" in share && (
