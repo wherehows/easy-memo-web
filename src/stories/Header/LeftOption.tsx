@@ -20,8 +20,16 @@ const LeftOption = ({ empty, option }: LeftOptionProps) => {
   if (option) {
     const { back, close } = option;
 
-    const Back = back && <button onClick={back.onClick}>뒤로가기</button>;
-    const Close = close && <button onClick={close.onClick}>닫기</button>;
+    const Back = back && (
+      <button key="back" onClick={back.onClick}>
+        뒤로가기
+      </button>
+    );
+    const Close = close && (
+      <button key="close" onClick={close.onClick}>
+        닫기
+      </button>
+    );
 
     return <div className="center">{[Back, Close]}</div>;
   }
