@@ -12,25 +12,56 @@ export const Index = {
       <>
         <div className="relative">
           <Header>
-            <Header.LeftOption logo />
+            <Header.LeftOption empty />
             <Header.MiddleText text="메인 페이지" />
             <Header.RightOption
-              option={{ search: true, filter: true, menu: true }}
+              option={{
+                edit: {
+                  onClick: () => {},
+                },
+              }}
             />
           </Header>
         </div>
         <div className="relative">
           <Header>
-            <Header.LeftOption option={{ back: true }} />
+            <Header.LeftOption
+              option={{
+                back: {
+                  onClick: () => {},
+                },
+              }}
+            />
             <Header.MiddleText text="상세 페이지" />
-            <Header.RightOption option={{ save: true }} />
+            <Header.RightOption
+              option={{
+                save: {
+                  onClick: () => {},
+                },
+              }}
+            />
           </Header>
         </div>
         <div className="relative">
           <Header>
-            <Header.LeftOption option={{ back: true }} />
+            <Header.LeftOption
+              option={{
+                back: {
+                  onClick: () => {},
+                },
+              }}
+            />
             <Header.MiddleText text="삭제 페이지" />
-            <Header.RightOption option={{ allSelection: true, remove: true }} />
+            <Header.RightOption
+              option={{
+                allSelection: {
+                  onClick: () => {},
+                },
+                remove: {
+                  onClick: () => {},
+                },
+              }}
+            />
           </Header>
         </div>
       </>
