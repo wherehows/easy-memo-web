@@ -14,6 +14,10 @@ const WritePage = () => {
   const contentTextAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const [id, date] = useMemo(() => {
+    if (typeof window === "undefined") {
+      return ["null", ""];
+    }
+
     let newId = customAlphabet("1234567890abcdefghijklmn", 7)();
 
     const priorData = checkedLocalStorage.getItem("memo", {});
