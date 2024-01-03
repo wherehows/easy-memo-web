@@ -36,7 +36,7 @@ const MEMO_LIST = [
 ];
 type MemoIdObject = { [id: number]: boolean };
 
-export default function Home() {
+const HomePage = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   const [isRemoveMap, setIsRemoveMap] = useState<{
@@ -137,4 +137,6 @@ export default function Home() {
       </main>
     </>
   );
-}
+};
+
+export default HomePage;
