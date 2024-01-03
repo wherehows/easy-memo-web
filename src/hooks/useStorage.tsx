@@ -20,6 +20,10 @@ const useStorage = <T,>(
   storageObject: CheckedLocalStorageType | CheckedSessionStorageType
 ) => {
   const [value, _setValue] = useState(() => {
+    if (typeof window === "undefined") {
+      return undefined;
+    }
+
     return storageObject.getItem(key, defaultValue);
   });
 
