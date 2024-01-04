@@ -70,9 +70,11 @@ const HomePage = () => {
                 },
               },
               remove: {
-                disabled: !getMemosToRemove(isRemoveMap, memoList).length,
+                disabled:
+                  getNewMemoList(isRemoveMap, memoList).length ===
+                  memoList.length,
                 onClick: () => {
-                  const newMemoList = getMemosToRemove(isRemoveMap, memoList);
+                  const newMemoList = getNewMemoList(isRemoveMap, memoList);
 
                   const count = newMemoList.length - memoList.length;
                   const messsage =
@@ -120,8 +122,9 @@ const HomePage = () => {
                   className={classNames(isEditing ? "flex flex-row" : "")}
                 >
                   {isEditing ? (
-                    <div className="flex items-center">
+                    <div className="flex items-center grow">
                       <input
+                        id={`${id}-checkbox`}
                         type="checkbox"
                         className="mr-[16px] w-4 h-4"
                         checked={isRemoveMap[id] || false}
@@ -132,7 +135,10 @@ const HomePage = () => {
                           })
                         }
                       />
-                      <label className="flex flex-col">
+                      <label
+                        htmlFor={`${id}-checkbox`}
+                        className="flex flex-col grow"
+                      >
                         {titleToShow}
                         <time className="text-sm text-gray-400">
                           {dateToShow}에 작성됨
@@ -163,10 +169,7 @@ const HomePage = () => {
 
 export default dynamic(() => Promise.resolve(HomePage), { ssr: false });
 
-const getMemosToRemove = (
-  isRemoveMap: MemoIdObject,
-  memoList: MemoItemProps[]
-) =>
+const getNewMemoList = (isRemoveMap: MemoIdObject, memoList: MemoItemProps[]) =>
   memoList.filter((memo) => {
     return isRemoveMap[memo.id] ? false : true;
   });
