@@ -40,7 +40,14 @@ const HomePage = () => {
             option={{
               close: {
                 onClick: () => {
+                  const newIsRemoveMap: MemoIdObject = {};
+
+                  for (const key in isRemoveMap) {
+                    newIsRemoveMap[key] = false;
+                  }
+
                   setIsEditing(false);
+                  setIsRemoveMap(newIsRemoveMap);
                 },
               },
             }}
@@ -53,9 +60,7 @@ const HomePage = () => {
             option={{
               allSelection: {
                 onClick: () => {
-                  const newState: {
-                    [id: number]: boolean;
-                  } = {};
+                  const newState: MemoIdObject = {};
 
                   for (const key in isRemoveMap) {
                     newState[key] = true;
@@ -65,13 +70,20 @@ const HomePage = () => {
                 },
               },
               remove: {
+                disabled: !getMemosToRemove(isRemoveMap, memoList).length,
                 onClick: () => {
-                  const newMemoList = [...memoList].filter((memo) => {
-                    return isRemoveMap[memo.id] ? false : true;
-                  });
+                  const newMemoList = getMemosToRemove(isRemoveMap, memoList);
 
-                  setMemoList(newMemoList);
-                  setIsEditing(false);
+                  const count = newMemoList.length - memoList.length;
+                  const messsage =
+                    count > 1
+                      ? "선택한 메모들을 삭제하시겠습니까?"
+                      : "선택한 메모를 삭제하시겠습니가?";
+
+                  if (confirm(messsage)) {
+                    setMemoList(newMemoList);
+                    setIsEditing(false);
+                  }
                 },
               },
             }}
@@ -150,3 +162,11 @@ const HomePage = () => {
 };
 
 export default dynamic(() => Promise.resolve(HomePage), { ssr: false });
+
+const getMemosToRemove = (
+  isRemoveMap: MemoIdObject,
+  memoList: MemoItemProps[]
+) =>
+  memoList.filter((memo) => {
+    return isRemoveMap[memo.id] ? false : true;
+  });
