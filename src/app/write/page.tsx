@@ -5,6 +5,7 @@ import Header from "@/stories/Header";
 import { debounce, getRefValue } from "@/utils/helpers";
 import { checkedLocalStorage } from "@/utils/storage";
 import { customAlphabet } from "nanoid";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useRef, useState } from "react";
 
@@ -12,12 +13,8 @@ const WritePage = () => {
   const router = useRouter();
   const titleInputRef = useRef<HTMLInputElement>(null);
   const contentTextAreaRef = useRef<HTMLTextAreaElement>(null);
-  const [newMemo, setNewMemo] = useState(() => {
-    if (typeof window === undefined) {
-      return undefined;
-    }
-
-    const newMemo = {
+  const [currentMemo, setCurrentMemo] = useState(() => {
+    const currentMemo = {
       id: getId(),
       date: new Date(),
       title: "",
@@ -26,40 +23,36 @@ const WritePage = () => {
 
     checkedLocalStorage.setItem("memo", [
       ...checkedLocalStorage.getItem("memo", []),
-      newMemo,
+      currentMemo,
     ]);
 
-    return newMemo;
+    return currentMemo;
   });
 
-  const [value, setValue] = useLocalStorage("memo", []);
-
-  if (typeof window === "undefined" || !newMemo) {
-    return <></>;
-  }
+  const [memoList, setMemoList] = useLocalStorage("memo", []);
 
   const handleChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const priorValue = value.slice(0, -1);
+    const priorValue = memoList.slice(0, -1);
 
     const newMemoState = {
-      ...newMemo,
+      ...currentMemo,
       content: e.target.value,
     };
 
-    setNewMemo(newMemoState);
-    setValue([...priorValue, newMemoState]);
+    setCurrentMemo(newMemoState);
+    setMemoList([...priorValue, newMemoState]);
   };
 
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    const priorValue = value.slice(0, -1);
+    const priorValue = memoList.slice(0, -1);
 
     const newMemoState = {
-      ...newMemo,
+      ...currentMemo,
       title: e.target.value,
     };
 
-    setNewMemo(newMemoState);
-    setValue([...priorValue, newMemoState]);
+    setCurrentMemo(newMemoState);
+    setMemoList([...priorValue, newMemoState]);
   };
 
   return (
@@ -81,8 +74,8 @@ const WritePage = () => {
             },
             save: {
               onClick: () => {
-                setValue({
-                  ...value,
+                setMemoList({
+                  ...memoList,
                   title: getRefValue(titleInputRef).value,
                   content: getRefValue(contentTextAreaRef).value,
                 });
@@ -91,7 +84,7 @@ const WritePage = () => {
           }}
         />
       </Header>
-      <main className="flex flex-col grow pt-[8px] pb-[16px] px-[24px]">
+      <main className="main pt-[8px] pb-[16px] px-[24px]">
         <div className="flex flex-col">
           <label htmlFor="title">제목</label>
           <input
@@ -118,7 +111,7 @@ const WritePage = () => {
   );
 };
 
-export default WritePage;
+export default dynamic(() => Promise.resolve(WritePage), { ssr: false });
 
 const getId = () => {
   let id = customAlphabet("1234567890abcdefghijklmn", 7)();

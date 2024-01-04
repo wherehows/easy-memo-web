@@ -17,6 +17,10 @@ body {
 }
 
 @layer components {
+  .main {
+    @apply flex flex-col grow;
+  }
+
   .center {
     @apply flex justify-center items-center;
   }
