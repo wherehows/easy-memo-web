@@ -1,10 +1,10 @@
-import { formatTimeDifference } from "@/utils/helpers";
 import Link from "next/link";
 
-interface MemoItemProps {
+export interface MemoItemProps {
   id: number;
   title: string;
-  date: Date;
+  content: string;
+  date: string;
 }
 
 const MemoItem = ({ id, title, date }: MemoItemProps) => {
@@ -13,7 +13,7 @@ const MemoItem = ({ id, title, date }: MemoItemProps) => {
       <Link href={`/detail/${id}`}>
         <h2>{title}</h2>
       </Link>
-      <time className="text-gray-400">{formatTimeDifference(date)}</time>
+      <time className="text-sm text-gray-400">{date}</time>
     </>
   );
 };
