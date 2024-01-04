@@ -4,6 +4,7 @@ import { useLocalStorage } from "@/hooks/useStorage";
 import Header from "@/stories/Header";
 import MemoItem, { MemoItemProps } from "@/stories/MemoItem";
 import { classNames, formatTimeDifference } from "@/utils/helpers";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 
 type MemoIdObject = { [id: number]: boolean };
@@ -134,4 +135,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default dynamic(() => Promise.resolve(HomePage), { ssr: false });
