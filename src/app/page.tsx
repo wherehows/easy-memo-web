@@ -1,48 +1,20 @@
 "use client";
 
+import { useLocalStorage } from "@/hooks/useStorage";
 import Header from "@/stories/Header";
-import MemoItem from "@/stories/MemoItem";
+import MemoItem, { MemoItemProps } from "@/stories/MemoItem";
 import { classNames, formatTimeDifference } from "@/utils/helpers";
 import { useState } from "react";
 
-const MEMO_LIST = [
-  {
-    id: 1,
-    title:
-      '용역업체에 벌점 취소 후 재부과한 서울교통공사…"신뢰보호 위반"[서초카페]',
-    date: new Date(),
-  },
-  {
-    id: 2,
-    title: "카카오 비상경영회의 재정비… 새해 쇄신 불 댕긴다",
-    date: new Date(),
-  },
-  {
-    id: 3,
-    title: "세계가 주목하는 ADC… 국내서도 M&A·지분투자 속도",
-    date: new Date(),
-  },
-  {
-    id: 4,
-    title:
-      '용역업체에 벌점 취소 후 재부과한 서울교통공사…"신뢰보호 위반"[서초카페]',
-    date: new Date(),
-  },
-  {
-    id: 5,
-    title: "신촌서 역주행하던 킥보드, 승용차 충돌…1명 의식불명",
-    date: new Date(),
-  },
-];
 type MemoIdObject = { [id: number]: boolean };
 
 const HomePage = () => {
   const [isEditing, setIsEditing] = useState(false);
 
-  const [isRemoveMap, setIsRemoveMap] = useState<{
-    [id: number]: boolean;
-  }>(
-    MEMO_LIST.reduce((acc, memo) => {
+  const [memoList, setMemoList] = useLocalStorage<MemoItemProps[]>("memo", []);
+
+  const [isRemoveMap, setIsRemoveMap] = useState<MemoIdObject>(
+    memoList.reduce((acc: MemoIdObject, memo: MemoItemProps) => {
       acc[memo.id] = false;
       return acc;
     }, {} as MemoIdObject)
@@ -81,7 +53,14 @@ const HomePage = () => {
                 },
               },
               remove: {
-                onClick: () => {},
+                onClick: () => {
+                  const newMemoList = [...memoList].filter((memo) => {
+                    return isRemoveMap[memo.id] ? false : true;
+                  });
+
+                  setMemoList(newMemoList);
+                  setIsEditing(false);
+                },
               },
             }}
           />
@@ -89,6 +68,7 @@ const HomePage = () => {
           <Header.RightOption
             option={{
               edit: {
+                disabled: !memoList.length,
                 onClick: () => {
                   setIsEditing(true);
                 },
@@ -98,42 +78,57 @@ const HomePage = () => {
           />
         )}
       </Header>
-      <main>
-        <ul className="flex flex-col gap-[16px] pt-[8px] pb-[16px] px-[24px]">
-          {MEMO_LIST.map((memo) => {
-            const { id, title, date } = memo;
+      <main className="flex grow">
+        {memoList.length ? (
+          <ul className="flex flex-col gap-[16px] pt-[8px] pb-[16px] px-[24px]">
+            {memoList.map(({ id, title, date, content }: MemoItemProps) => {
+              const titleToShow =
+                title || content.substring(0, 20) || "제목이 없습니다";
 
-            return (
-              <li
-                key={id}
-                className={classNames(isEditing ? "flex flex-row" : "")}
-              >
-                {isEditing ? (
-                  <>
-                    <input
-                      type="checkbox"
-                      checked={isRemoveMap[id] || false}
-                      onChange={() =>
-                        setIsRemoveMap({
-                          ...isRemoveMap,
-                          [id]: !isRemoveMap[id],
-                        })
-                      }
+              const dateToShow = formatTimeDifference(new Date(date));
+
+              return (
+                <li
+                  key={id}
+                  className={classNames(isEditing ? "flex flex-row" : "")}
+                >
+                  {isEditing ? (
+                    <div className="flex items-center">
+                      <input
+                        type="checkbox"
+                        className="mr-[16px] w-4 h-4"
+                        checked={isRemoveMap[id] || false}
+                        onChange={() =>
+                          setIsRemoveMap({
+                            ...isRemoveMap,
+                            [id]: !isRemoveMap[id],
+                          })
+                        }
+                      />
+                      <label className="flex flex-col">
+                        {titleToShow}
+                        <time className="text-sm text-gray-400">
+                          {dateToShow}
+                        </time>
+                      </label>
+                    </div>
+                  ) : (
+                    <MemoItem
+                      id={id}
+                      date={dateToShow}
+                      title={titleToShow}
+                      content={content}
                     />
-                    <label className="flex flex-col">
-                      {title}
-                      <time className="text-gray-400">
-                        {formatTimeDifference(date)}
-                      </time>
-                    </label>
-                  </>
-                ) : (
-                  <MemoItem {...memo} />
-                )}
-              </li>
-            );
-          })}
-        </ul>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <div className="grow center text-gray-400">
+            작성된 메모가 없습니다. 메모를 작성해주세요
+          </div>
+        )}
       </main>
     </>
   );
