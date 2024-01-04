@@ -13,7 +13,7 @@ const MemoItem = ({ id, title, date }: MemoItemProps) => {
       <Link href={`/detail/${id}`}>
         <h2>{title}</h2>
       </Link>
-      <time className="text-sm text-gray-400">{date}</time>
+      <time className="text-sm text-gray-400">{date}에 작성됨</time>
     </>
   );
 };

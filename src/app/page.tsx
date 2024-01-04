@@ -109,7 +109,7 @@ const HomePage = () => {
                       <label className="flex flex-col">
                         {titleToShow}
                         <time className="text-sm text-gray-400">
-                          {dateToShow}
+                          {dateToShow}에 작성됨
                         </time>
                       </label>
                     </div>
