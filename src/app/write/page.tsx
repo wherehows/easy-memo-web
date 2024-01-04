@@ -6,48 +6,60 @@ import { debounce, getRefValue } from "@/utils/helpers";
 import { checkedLocalStorage } from "@/utils/storage";
 import { customAlphabet } from "nanoid";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useMemo, useRef } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 
 const WritePage = () => {
   const router = useRouter();
   const titleInputRef = useRef<HTMLInputElement>(null);
   const contentTextAreaRef = useRef<HTMLTextAreaElement>(null);
-
-  const [id, date] = useMemo(() => {
-    if (typeof window === "undefined") {
-      return ["null", ""];
+  const [newMemo, setNewMemo] = useState(() => {
+    if (typeof window === undefined) {
+      return undefined;
     }
 
-    let newId = customAlphabet("1234567890abcdefghijklmn", 7)();
+    const newMemo = {
+      id: getId(),
+      date: new Date(),
+      title: "",
+      content: "",
+    };
 
-    const priorData = checkedLocalStorage.getItem("memo", {});
+    checkedLocalStorage.setItem("memo", [
+      ...checkedLocalStorage.getItem("memo", []),
+      newMemo,
+    ]);
 
-    while (priorData && newId in priorData) {
-      newId = customAlphabet("1234567890abcdefghijklmn", 7)();
-    }
-
-    return [newId, new Date()];
-  }, []);
-
-  const [value, setValue] = useLocalStorage(id, {
-    id: id,
-    date,
-    title: "",
-    content: "",
+    return newMemo;
   });
 
+  const [value, setValue] = useLocalStorage("memo", []);
+
+  if (typeof window === "undefined" || !newMemo) {
+    return <></>;
+  }
+
   const handleChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setValue({
-      ...value,
+    const priorValue = value.slice(0, -1);
+
+    const newMemoState = {
+      ...newMemo,
       content: e.target.value,
-    });
+    };
+
+    setNewMemo(newMemoState);
+    setValue([...priorValue, newMemoState]);
   };
 
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue({
-      ...value,
+    const priorValue = value.slice(0, -1);
+
+    const newMemoState = {
+      ...newMemo,
       title: e.target.value,
-    });
+    };
+
+    setNewMemo(newMemoState);
+    setValue([...priorValue, newMemoState]);
   };
 
   return (
@@ -107,3 +119,27 @@ const WritePage = () => {
 };
 
 export default WritePage;
+
+const getId = () => {
+  let id = customAlphabet("1234567890abcdefghijklmn", 7)();
+  let duplicated = true;
+
+  const priorData = checkedLocalStorage.getItem("memo", []);
+
+  while (priorData.length && duplicated) {
+    for (let i = 0; i < priorData.length; i++) {
+      const current = priorData[i];
+
+      if (current.id === id) {
+        id = customAlphabet("1234567890abcdefghijklmn", 7)();
+        break;
+      }
+
+      if (priorData.length - 1 === i) {
+        duplicated = false;
+      }
+    }
+  }
+
+  return id;
+};
