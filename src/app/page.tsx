@@ -7,7 +7,7 @@ import { classNames, formatTimeDifference, getRefValue } from "@/utils/helpers";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 
-type MemoIdObject = { [id: number]: boolean };
+type IsRemoveMapType = { [id: number]: boolean };
 
 const HomePage = () => {
   const memoListRef = useRef<HTMLUListElement>(null);
@@ -19,11 +19,11 @@ const HomePage = () => {
       +new Date(b.date) - +new Date(a.date)
   );
 
-  const [isRemoveMap, setIsRemoveMap] = useState<MemoIdObject>(
-    sortedMemoList.reduce((acc: MemoIdObject, memo: MemoItemProps) => {
+  const [isRemoveMap, setIsRemoveMap] = useState<IsRemoveMapType>(
+    sortedMemoList.reduce((acc: IsRemoveMapType, memo: MemoItemProps) => {
       acc[memo.id] = false;
       return acc;
-    }, {} as MemoIdObject)
+    }, {} as IsRemoveMapType)
   );
 
   useEffect(() => {
