@@ -23,12 +23,12 @@ const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
       .getItem("memo", [])
       .find((memo: MemoItemProps) => String(memo.id) === memoId);
 
-    checkedLocalStorage.setItem(
-      "memo",
-      checkedLocalStorage
+    checkedLocalStorage.setItem("memo", [
+      ...checkedLocalStorage
         .getItem("memo", [])
-        .filter((memo: MemoItemProps) => String(memo.id) !== memoId)
-    );
+        .filter((memo: MemoItemProps) => String(memo.id) !== memoId),
+      currentMemo,
+    ]);
 
     return currentMemo;
   });
