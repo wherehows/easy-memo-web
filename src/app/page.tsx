@@ -40,7 +40,14 @@ const HomePage = () => {
             option={{
               close: {
                 onClick: () => {
+                  const newIsRemoveMap: MemoIdObject = {};
+
+                  for (const key in isRemoveMap) {
+                    newIsRemoveMap[key] = false;
+                  }
+
                   setIsEditing(false);
+                  setIsRemoveMap(newIsRemoveMap);
                 },
               },
             }}
@@ -53,9 +60,7 @@ const HomePage = () => {
             option={{
               allSelection: {
                 onClick: () => {
-                  const newState: {
-                    [id: number]: boolean;
-                  } = {};
+                  const newState: MemoIdObject = {};
 
                   for (const key in isRemoveMap) {
                     newState[key] = true;
@@ -65,13 +70,22 @@ const HomePage = () => {
                 },
               },
               remove: {
+                disabled:
+                  getNewMemoList(isRemoveMap, memoList).length ===
+                  memoList.length,
                 onClick: () => {
-                  const newMemoList = [...memoList].filter((memo) => {
-                    return isRemoveMap[memo.id] ? false : true;
-                  });
+                  const newMemoList = getNewMemoList(isRemoveMap, memoList);
 
-                  setMemoList(newMemoList);
-                  setIsEditing(false);
+                  const count = newMemoList.length - memoList.length;
+                  const messsage =
+                    count > 1
+                      ? "선택한 메모들을 삭제하시겠습니까?"
+                      : "선택한 메모를 삭제하시겠습니가?";
+
+                  if (confirm(messsage)) {
+                    setMemoList(newMemoList);
+                    setIsEditing(false);
+                  }
                 },
               },
             }}
@@ -108,8 +122,9 @@ const HomePage = () => {
                   className={classNames(isEditing ? "flex flex-row" : "")}
                 >
                   {isEditing ? (
-                    <div className="flex items-center">
+                    <div className="flex items-center grow">
                       <input
+                        id={`${id}-checkbox`}
                         type="checkbox"
                         className="mr-[16px] w-4 h-4"
                         checked={isRemoveMap[id] || false}
@@ -120,7 +135,10 @@ const HomePage = () => {
                           })
                         }
                       />
-                      <label className="flex flex-col">
+                      <label
+                        htmlFor={`${id}-checkbox`}
+                        className="flex flex-col grow"
+                      >
                         {titleToShow}
                         <time className="text-sm text-gray-400">
                           {dateToShow}에 작성됨
@@ -150,3 +168,8 @@ const HomePage = () => {
 };
 
 export default dynamic(() => Promise.resolve(HomePage), { ssr: false });
+
+const getNewMemoList = (isRemoveMap: MemoIdObject, memoList: MemoItemProps[]) =>
+  memoList.filter((memo) => {
+    return isRemoveMap[memo.id] ? false : true;
+  });
