@@ -3,13 +3,14 @@
 import { useLocalStorage } from "@/hooks/useStorage";
 import Header from "@/stories/Header";
 import MemoItem, { MemoItemProps } from "@/stories/MemoItem";
-import { classNames, formatTimeDifference } from "@/utils/helpers";
+import { classNames, formatTimeDifference, getRefValue } from "@/utils/helpers";
 import dynamic from "next/dynamic";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type MemoIdObject = { [id: number]: boolean };
 
 const HomePage = () => {
+  const memoListRef = useRef<HTMLUListElement>(null);
   const [isEditing, setIsEditing] = useState(false);
 
   const [memoList, setMemoList] = useLocalStorage<MemoItemProps[]>("memo", []);
@@ -20,6 +21,16 @@ const HomePage = () => {
       return acc;
     }, {} as MemoIdObject)
   );
+
+  useEffect(() => {
+    if (isEditing) {
+      const { firstChild } = getRefValue(memoListRef);
+
+      if (firstChild instanceof Element) {
+        firstChild.querySelector("input")?.focus();
+      }
+    }
+  }, [isEditing]);
 
   return (
     <>
@@ -81,7 +92,10 @@ const HomePage = () => {
       </Header>
       <main className="main">
         {memoList.length ? (
-          <ul className="flex flex-col gap-[16px] pt-[8px] pb-[16px] px-[24px]">
+          <ul
+            ref={memoListRef}
+            className="flex flex-col gap-[16px] pt-[8px] pb-[16px] px-[24px]"
+          >
             {memoList.map(({ id, title, date, content }: MemoItemProps) => {
               const titleToShow =
                 title || content.substring(0, 20) || "제목이 없습니다";
