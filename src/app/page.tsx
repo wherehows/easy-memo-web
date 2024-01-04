@@ -78,7 +78,7 @@ const HomePage = () => {
           />
         )}
       </Header>
-      <main className="flex grow">
+      <main className="main">
         {memoList.length ? (
           <ul className="flex flex-col gap-[16px] pt-[8px] pb-[16px] px-[24px]">
             {memoList.map(({ id, title, date, content }: MemoItemProps) => {
