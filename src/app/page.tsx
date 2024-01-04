@@ -44,7 +44,7 @@ const HomePage = () => {
             option={{
               close: {
                 onClick: () => {
-                  const newIsRemoveMap: MemoIdObject = {};
+                  const newIsRemoveMap: IsRemoveMapType = {};
 
                   for (const key in isRemoveMap) {
                     newIsRemoveMap[key] = false;
@@ -64,7 +64,7 @@ const HomePage = () => {
             option={{
               allSelection: {
                 onClick: () => {
-                  const newState: MemoIdObject = {};
+                  const newState: IsRemoveMapType = {};
 
                   for (const key in isRemoveMap) {
                     newState[key] = true;
@@ -175,7 +175,10 @@ const HomePage = () => {
 
 export default dynamic(() => Promise.resolve(HomePage), { ssr: false });
 
-const getNewMemoList = (isRemoveMap: MemoIdObject, memoList: MemoItemProps[]) =>
+const getNewMemoList = (
+  isRemoveMap: IsRemoveMapType,
+  memoList: MemoItemProps[]
+) =>
   memoList.filter((memo) => {
     return isRemoveMap[memo.id] ? false : true;
   });
