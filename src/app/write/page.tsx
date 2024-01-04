@@ -32,7 +32,7 @@ const WritePage = () => {
   const [memoList, setMemoList] = useLocalStorage("memo", []);
 
   const handleChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const priorValue = memoList.slice(0, -1);
+    const priorMemoList = memoList.slice(0, -1);
 
     const newMemoState = {
       ...currentMemo,
@@ -40,11 +40,11 @@ const WritePage = () => {
     };
 
     setCurrentMemo(newMemoState);
-    setMemoList([...priorValue, newMemoState]);
+    setMemoList([...priorMemoList, newMemoState]);
   };
 
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    const priorValue = memoList.slice(0, -1);
+    const priorMemoList = memoList.slice(0, -1);
 
     const newMemoState = {
       ...currentMemo,
@@ -52,7 +52,7 @@ const WritePage = () => {
     };
 
     setCurrentMemo(newMemoState);
-    setMemoList([...priorValue, newMemoState]);
+    setMemoList([...priorMemoList, newMemoState]);
   };
 
   return (
@@ -74,11 +74,8 @@ const WritePage = () => {
             },
             save: {
               onClick: () => {
-                setMemoList({
-                  ...memoList,
-                  title: getRefValue(titleInputRef).value,
-                  content: getRefValue(contentTextAreaRef).value,
-                });
+                const priorMemoList = memoList.slice(0, -1);
+                setMemoList([...priorMemoList, currentMemo]);
               },
             },
           }}
