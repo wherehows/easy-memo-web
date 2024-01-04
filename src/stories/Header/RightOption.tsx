@@ -38,7 +38,7 @@ const RightOption = ({ text, option }: RightOptionProps) => {
     );
 
     const Edit = edit && "onClick" in edit && (
-      <button key="onClick" onClick={edit.onClick}>
+      <button key="onClick" disabled={edit.disabled} onClick={edit.onClick}>
         편집
       </button>
     );
