@@ -1,4 +1,5 @@
 import { IconButtonOption, XOR } from "@/types/common";
+import { classNames } from "@/utils/helpers";
 import Link from "next/link";
 
 type RightOptionProps = XOR<
@@ -31,14 +32,25 @@ const RightOption = ({ text, option }: RightOptionProps) => {
         전체 선택
       </button>
     );
+
     const Remove = remove && "onClick" in remove && (
-      <button key="remove" onClick={remove.onClick}>
+      <button
+        key="remove"
+        className={classNames(!!remove.disabled && "text-gray-500")}
+        disabled={remove.disabled}
+        onClick={remove.onClick}
+      >
         삭제
       </button>
     );
 
     const Edit = edit && "onClick" in edit && (
-      <button key="onClick" disabled={edit.disabled} onClick={edit.onClick}>
+      <button
+        key="onClick"
+        className={classNames(!!edit.disabled && "text-gray-500")}
+        disabled={edit.disabled}
+        onClick={edit.onClick}
+      >
         편집
       </button>
     );
