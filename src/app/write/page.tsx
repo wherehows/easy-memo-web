@@ -8,6 +8,7 @@ import { customAlphabet } from "nanoid";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 const WritePage = () => {
   const router = useRouter();
@@ -76,6 +77,13 @@ const WritePage = () => {
               onClick: () => {
                 const priorMemoList = memoList.slice(0, -1);
                 setMemoList([...priorMemoList, currentMemo]);
+                toast("저장되었습니다", {
+                  duration: 2000,
+                  ariaProps: {
+                    role: "status",
+                    "aria-live": "polite",
+                  },
+                });
               },
             },
           }}

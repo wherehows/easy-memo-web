@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Script from "next/script";
 import appleGothic from "@/utils/font";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +17,15 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <Script src="https://kit.fontawesome.com/48e58babbf.js" />
-      <body className={appleGothic.className}>{children}</body>
+      <body className={appleGothic.className}>
+        <Toaster
+          position="bottom-center"
+          containerStyle={{
+            inset: "16px 16px 60px 16px",
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

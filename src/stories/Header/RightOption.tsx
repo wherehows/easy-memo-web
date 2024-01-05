@@ -37,6 +37,7 @@ const RightOption = ({ text, option }: RightOptionProps) => {
       <button
         key="remove"
         className={classNames(!!remove.disabled && "text-gray-500")}
+        aria-disabled={remove.disabled}
         disabled={remove.disabled}
         onClick={remove.onClick}
       >
@@ -48,6 +49,7 @@ const RightOption = ({ text, option }: RightOptionProps) => {
       <button
         key="onClick"
         className={classNames(!!edit.disabled && "text-gray-500")}
+        aria-disabled={edit.disabled}
         disabled={edit.disabled}
         onClick={edit.onClick}
       >
@@ -65,9 +67,14 @@ const RightOption = ({ text, option }: RightOptionProps) => {
         공유
       </button>
     );
-    const saveDisabled = save && typeof save !== "boolean" && !!save.disabled;
+
     const Save = save && "onClick" in save && (
-      <button key="onClick" onClick={save.onClick} disabled={saveDisabled}>
+      <button
+        key="onClick"
+        onClick={save.onClick}
+        aria-disabled={save.disabled}
+        disabled={save.disabled}
+      >
         저장
       </button>
     );
