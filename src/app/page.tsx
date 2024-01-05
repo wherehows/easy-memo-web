@@ -124,7 +124,7 @@ const HomePage = () => {
         {sortedMemoList.length ? (
           <ul
             ref={memoListRef}
-            className="flex flex-col gap-[16px] pt-[8px] pb-[16px] px-[24px]"
+            className="flex flex-col gap-[16px] pt-[8px] pb-[16px] px-[8px]"
           >
             {sortedMemoList.map(
               ({ id, title, date, content }: MemoItemProps) => {

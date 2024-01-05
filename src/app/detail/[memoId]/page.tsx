@@ -88,7 +88,7 @@ const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
           }}
         />
       </Header>
-      <main className="main pt-[8px] pb-[16px] px-[24px]">
+      <main className="main pt-[8px] pb-[16px] px-[8px]">
         <div className="flex flex-col">
           <label htmlFor="title">제목</label>
           <input
