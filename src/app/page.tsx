@@ -6,6 +6,7 @@ import MemoItem, { MemoItemProps } from "@/stories/MemoItem";
 import { classNames, formatTimeDifference, getRefValue } from "@/utils/helpers";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 type IsRemoveMapType = { [id: number]: boolean };
 
@@ -81,14 +82,25 @@ const HomePage = () => {
                   const newMemoList = getNewMemoList(isRemoveMap, memoList);
 
                   const count = newMemoList.length - memoList.length;
-                  const messsage =
+                  const confirmMessage =
                     count > 1
                       ? "선택한 메모들을 삭제하시겠습니까?"
                       : "선택한 메모를 삭제하시겠습니가?";
+                  const resultMessage =
+                    count > 1
+                      ? "선택한 메모들이 삭제됐습니다"
+                      : "선택한 메모가 삭제됐습니다";
 
-                  if (confirm(messsage)) {
+                  if (confirm(confirmMessage)) {
                     setMemoList(newMemoList);
                     setIsEditing(false);
+                    toast(resultMessage, {
+                      duration: 3000,
+                      ariaProps: {
+                        role: "status",
+                        "aria-live": "polite",
+                      },
+                    });
                   }
                 },
               },
