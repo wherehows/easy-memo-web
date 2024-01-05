@@ -85,7 +85,7 @@ const HomePage = () => {
                   const confirmMessage =
                     count > 1
                       ? "선택한 메모들을 삭제하시겠습니까?"
-                      : "선택한 메모를 삭제하시겠습니가?";
+                      : "선택한 메모를 삭제하시겠습니까 ?";
                   const resultMessage =
                     count > 1
                       ? "선택한 메모들이 삭제됐습니다"
