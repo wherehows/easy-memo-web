@@ -21,7 +21,7 @@ const NotFoundPage = () => {
       </Header>
       <main className="main pt-[8px] pb-[16px] px-[24px]">
         <div className="grow center text-gray-400">
-          존재하지 않는 메모입니다.
+          존재하지 않는 페이지입니다.
         </div>
       </main>
     </>
