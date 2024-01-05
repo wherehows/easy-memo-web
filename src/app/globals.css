@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  @apply relative h-[100%] mx-auto max-w-[600px] flex flex-col bg-black text-white;
+  @apply relative h-[100%] mx-auto max-w-[600px] flex flex-col bg-black text-white select-none;
 }
 
 @layer base {
