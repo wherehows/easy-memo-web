@@ -20,25 +20,6 @@ export const isStorageAvailable = (type: "localStorage" | "sessionStorage") => {
   }
 };
 
-class TempMemory<T> {
-  private cache: { [key: string]: T | undefined } = {};
-
-  constructor() {
-    this.cache = {};
-  }
-  setItem(key: string, value: T) {
-    this.cache[key] = value;
-  }
-  getItem(key: string, defaultValue: T) {
-    return this.cache[key] || defaultValue;
-  }
-  removeItem(key: string) {
-    this.cache[key] = undefined;
-  }
-}
-
-export type TempMemoryType<T> = TempMemory<T>;
-
 export const checkedLocalStorage = {
   getItem: <T>(key: string, defaultValue: T) => {
     const jsonValue = localStorage.getItem(key);
