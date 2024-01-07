@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../globals.css";
 import Script from "next/script";
 import appleGothic from "@/utils/font";
 import { Toaster } from "react-hot-toast";
