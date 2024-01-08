@@ -130,7 +130,7 @@ const HomePage = () => {
             {sortedMemoList.map(
               ({ id, title, date, content }: MemoItemProps) => {
                 const titleToShow =
-                  title || content.substring(0, 20) || "제목이 없습니다";
+                  title || content.substring(0, 20) || t("except.no-title");
 
                 const dateToShow = formatTimeDifference(new Date(date));
 
