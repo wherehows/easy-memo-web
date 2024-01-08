@@ -1,0 +1,26 @@
+{
+  "header": {
+    "edit": "edit",
+    "create": "create",
+    "close": "close",
+    "back": "back",
+    "select-all": "select all",
+    "delete": "delete",
+    "share": "share",
+    "save": "save"
+  },
+  "toast": {
+    "remove": "The memo has been deleted",
+    "save": "It's been saved"
+  },
+  "dialog": {
+    "remove": "Would you like to delete {count, plural, =0 {# memo} =1 {1 memo} other {# memos}}?"
+  },
+  "except": {
+    "empty": "There are no written memos. Please write a memo"
+  },
+  "write": {
+    "title": "title",
+    "content": "content"
+  }
+}
