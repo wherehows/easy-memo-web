@@ -5,6 +5,7 @@ import Header from "@/stories/Header";
 import { MemoItemProps } from "@/stories/MemoItem";
 import { debounce } from "@/utils/helpers";
 import { checkedLocalStorage } from "@/utils/storage";
+import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import { notFound, useRouter } from "next/navigation";
 import { ChangeEvent, useRef, useState } from "react";
@@ -14,6 +15,8 @@ interface DetailPageProps {
 }
 
 const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
+  const t = useTranslations();
+
   const router = useRouter();
   const titleInputRef = useRef<HTMLInputElement>(null);
   const contentTextAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -90,7 +93,7 @@ const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
       </Header>
       <main className="main pt-[8px] pb-[16px] px-[8px]">
         <div className="flex flex-col">
-          <label htmlFor="title">제목</label>
+          <label htmlFor="title">{t("write.title")}</label>
           <input
             id="title"
             type="text"
@@ -102,7 +105,7 @@ const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
           />
         </div>
         <div className="flex flex-col grow">
-          <label htmlFor="content">내용</label>
+          <label htmlFor="content">{t("write.content")}</label>
           <textarea
             id="content"
             ref={contentTextAreaRef}

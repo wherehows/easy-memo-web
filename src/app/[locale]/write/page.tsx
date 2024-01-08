@@ -5,12 +5,15 @@ import Header from "@/stories/Header";
 import { debounce, getRefValue } from "@/utils/helpers";
 import { checkedLocalStorage } from "@/utils/storage";
 import { customAlphabet } from "nanoid";
+import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const WritePage = () => {
+  const t = useTranslations();
+
   const router = useRouter();
   const titleInputRef = useRef<HTMLInputElement>(null);
   const contentTextAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -77,7 +80,7 @@ const WritePage = () => {
               onClick: () => {
                 const priorMemoList = memoList.slice(0, -1);
                 setMemoList([...priorMemoList, currentMemo]);
-                toast("저장되었습니다", {
+                toast(t("toast.save"), {
                   duration: 2000,
                   ariaProps: {
                     role: "status",
@@ -91,7 +94,7 @@ const WritePage = () => {
       </Header>
       <main className="main pt-[8px] pb-[16px] px-[8px]">
         <div className="flex flex-col">
-          <label htmlFor="title">제목</label>
+          <label htmlFor="title">{t("write.title")}</label>
           <input
             id="title"
             type="text"
@@ -102,7 +105,7 @@ const WritePage = () => {
           />
         </div>
         <div className="flex flex-col grow">
-          <label htmlFor="content">내용</label>
+          <label htmlFor="content">{t("write.content")}</label>
           <textarea
             id="content"
             ref={contentTextAreaRef}

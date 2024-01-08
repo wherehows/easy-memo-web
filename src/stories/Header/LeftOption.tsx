@@ -1,6 +1,7 @@
 "use client";
 
 import { IconButtonOption, XOR } from "@/types/common";
+import { useTranslations } from "next-intl";
 
 type LeftOptionProps = XOR<
   {
@@ -13,6 +14,8 @@ type LeftOptionProps = XOR<
 >;
 
 const LeftOption = ({ empty, option }: LeftOptionProps) => {
+  const t = useTranslations("header");
+
   if (empty) {
     return <div />;
   }
@@ -22,12 +25,12 @@ const LeftOption = ({ empty, option }: LeftOptionProps) => {
 
     const Back = back && (
       <button key="back" onClick={back.onClick}>
-        뒤로가기
+        {t("back")}
       </button>
     );
     const Close = close && (
       <button key="close" onClick={close.onClick}>
-        닫기
+        {t("close")}
       </button>
     );
 

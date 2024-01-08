@@ -1,0 +1,26 @@
+{
+  "header": {
+    "edit": "编辑",
+    "create": "写作",
+    "close": "关闭",
+    "back": "返回",
+    "select-all": "全选",
+    "delete": "删除",
+    "share": "共享",
+    "save": "保存"
+  },
+  "toast": {
+    "remove": "备忘录已被删除",
+    "save": ""
+  },
+  "dialog": {
+    "remove": "您确定要删除{count, plural, =0 {#} =1 {#} other {#}}条备忘录吗？"
+  },
+  "except": {
+    "empty": ""
+  },
+  "write": {
+    "title": "",
+    "content": ""
+  }
+}

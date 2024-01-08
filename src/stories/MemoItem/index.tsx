@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/utils/navigation";
 
 export interface MemoItemProps {
   id: number;

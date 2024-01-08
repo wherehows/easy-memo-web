@@ -4,6 +4,7 @@ import { useLocalStorage } from "@/hooks/useStorage";
 import Header from "@/stories/Header";
 import MemoItem, { MemoItemProps } from "@/stories/MemoItem";
 import { classNames, formatTimeDifference, getRefValue } from "@/utils/helpers";
+import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
@@ -11,6 +12,8 @@ import toast from "react-hot-toast";
 type IsRemoveMapType = { [id: number]: boolean };
 
 const HomePage = () => {
+  const t = useTranslations();
+
   const memoListRef = useRef<HTMLUListElement>(null);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -81,20 +84,14 @@ const HomePage = () => {
                 onClick: () => {
                   const newMemoList = getNewMemoList(isRemoveMap, memoList);
 
-                  const count = newMemoList.length - memoList.length;
-                  const confirmMessage =
-                    count > 1
-                      ? "선택한 메모들을 삭제하시겠습니까?"
-                      : "선택한 메모를 삭제하시겠습니까 ?";
-                  const resultMessage =
-                    count > 1
-                      ? "선택한 메모들이 삭제됐습니다"
-                      : "선택한 메모가 삭제됐습니다";
+                  const count = memoList.length - newMemoList.length;
+                  const confirmMessage = t("dialog.remove", { count });
+                  const toastMessage = t("toast.remove");
 
                   if (confirm(confirmMessage)) {
                     setMemoList(newMemoList);
                     setIsEditing(false);
-                    toast(resultMessage, {
+                    toast(toastMessage, {
                       duration: 3000,
                       ariaProps: {
                         role: "status",
@@ -176,9 +173,7 @@ const HomePage = () => {
             )}
           </ul>
         ) : (
-          <div className="grow center text-gray-400">
-            작성된 메모가 없습니다. 메모를 작성해주세요
-          </div>
+          <div className="grow center text-gray-400">{t("except.empty")}</div>
         )}
       </main>
     </>
