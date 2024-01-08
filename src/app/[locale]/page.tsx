@@ -173,9 +173,7 @@ const HomePage = () => {
             )}
           </ul>
         ) : (
-          <div className="grow center text-gray-400">
-            작성된 메모가 없습니다. 메모를 작성해주세요
-          </div>
+          <div className="grow center text-gray-400">{t("except.empty")}</div>
         )}
       </main>
     </>
