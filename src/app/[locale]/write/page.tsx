@@ -1,8 +1,8 @@
 "use client";
 
-import { useLocalStorage } from "@/hooks/useStorage";
+import { useStorage } from "@/hooks/useStorage";
 import Header from "@/stories/Header";
-import { debounce, getRefValue } from "@/utils/helpers";
+import { debounce } from "@/utils/helpers";
 import { checkedLocalStorage } from "@/utils/storage";
 import { customAlphabet } from "nanoid";
 import { useTranslations } from "next-intl";
@@ -33,7 +33,7 @@ const WritePage = () => {
     return currentMemo;
   });
 
-  const [memoList, setMemoList] = useLocalStorage("memo", []);
+  const [memoList, setMemoList] = useStorage("memo", [], "localStorage");
 
   const handleChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const priorMemoList = memoList.slice(0, -1);

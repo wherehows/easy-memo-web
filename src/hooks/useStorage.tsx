@@ -1,40 +1,33 @@
-import {
-  CheckedLocalStorageType,
-  CheckedSessionStorageType,
-  checkedLocalStorage,
-  checkedSessionStorage,
-} from "@/utils/storage";
-import { useState } from "react";
+import { getRefValue } from "@/utils/helpers";
+import { checkedLocalStorage, checkedSessionStorage } from "@/utils/storage";
+import { useRef, useState } from "react";
 
-export const useLocalStorage = <T,>(key: string, defaultValue: T) => {
-  return useStorage(key, defaultValue, checkedLocalStorage);
-};
-
-export const useSessionStorage = <T,>(key: string, defaultValue: T) => {
-  return useStorage(key, defaultValue, checkedSessionStorage);
-};
-
-const useStorage = <T,>(
+export const useStorage = <T,>(
   key: string,
   defaultValue: T,
-  storageObject: CheckedLocalStorageType | CheckedSessionStorageType
+  storageObject: "localStorage" | "sessionStorage"
 ) => {
+  const storageRef = useRef(
+    storageObject === "localStorage"
+      ? checkedLocalStorage
+      : checkedSessionStorage
+  );
   const [value, _setValue] = useState(() => {
     if (typeof window === "undefined") {
       return undefined;
     }
 
-    return storageObject.getItem(key, defaultValue);
+    return getRefValue(storageRef).getItem(key, defaultValue);
   });
 
   const setValue = (value: T) => {
     _setValue(value);
-    storageObject.setItem(key, value);
+    getRefValue(storageRef).setItem(key, value);
   };
 
   const remove = () => {
     _setValue(undefined);
-    storageObject.removeItem(key);
+    getRefValue(storageRef).removeItem(key);
   };
 
   return [value, setValue, remove];

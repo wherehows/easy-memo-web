@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocalStorage } from "@/hooks/useStorage";
+import { useStorage } from "@/hooks/useStorage";
 import Header from "@/stories/Header";
 import MemoItem, { MemoItemProps } from "@/stories/MemoItem";
 import { classNames, formatTimeDifference, getRefValue } from "@/utils/helpers";
@@ -17,7 +17,11 @@ const HomePage = () => {
   const memoListRef = useRef<HTMLUListElement>(null);
   const [isEditing, setIsEditing] = useState(false);
 
-  const [memoList, setMemoList] = useLocalStorage<MemoItemProps[]>("memo", []);
+  const [memoList, setMemoList] = useStorage<MemoItemProps[]>(
+    "memo",
+    [],
+    "localStorage"
+  );
   const sortedMemoList = memoList.sort(
     (a: MemoItemProps, b: MemoItemProps) =>
       +new Date(b.date) - +new Date(a.date)

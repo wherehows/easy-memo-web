@@ -1,6 +1,6 @@
 "use client";
 
-import { useLocalStorage } from "@/hooks/useStorage";
+import { useStorage } from "@/hooks/useStorage";
 import Header from "@/stories/Header";
 import { MemoItemProps } from "@/stories/MemoItem";
 import { debounce } from "@/utils/helpers";
@@ -40,7 +40,7 @@ const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
     return currentMemo;
   });
 
-  const [memoList, setMemoList] = useLocalStorage("memo", []);
+  const [memoList, setMemoList] = useStorage("memo", [], "localStorage");
 
   if (!currentMemo) {
     return notFound();
