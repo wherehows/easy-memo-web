@@ -1,6 +1,7 @@
 import { IconButtonOption, XOR } from "@/types/common";
 import { classNames } from "@/utils/helpers";
-import Link from "next/link";
+import { Link } from "@/utils/navigation";
+import { useTranslations } from "next-intl";
 
 type RightOptionProps = XOR<
   {
@@ -20,6 +21,8 @@ type RightOptionProps = XOR<
 >;
 
 const RightOption = ({ text, option }: RightOptionProps) => {
+  const t = useTranslations("header");
+
   if (text) {
     return <button>{text}</button>;
   }
@@ -29,7 +32,7 @@ const RightOption = ({ text, option }: RightOptionProps) => {
 
     const AllSelection = allSelection && "onClick" in allSelection && (
       <button key="allSelection" onClick={allSelection.onClick}>
-        전체 선택
+        {t("select-all")}
       </button>
     );
 
@@ -41,7 +44,7 @@ const RightOption = ({ text, option }: RightOptionProps) => {
         disabled={remove.disabled}
         onClick={remove.onClick}
       >
-        삭제
+        {t("delete")}
       </button>
     );
 
@@ -53,18 +56,18 @@ const RightOption = ({ text, option }: RightOptionProps) => {
         disabled={edit.disabled}
         onClick={edit.onClick}
       >
-        편집
+        {t("edit")}
       </button>
     );
     const Write = write && (
       <Link key="write" href="/write">
-        작성
+        {t("create")}
       </Link>
     );
 
     const Share = share && "onClick" in share && (
       <button key="share" onClick={share.onClick}>
-        공유
+        {t("share")}
       </button>
     );
 
@@ -75,7 +78,7 @@ const RightOption = ({ text, option }: RightOptionProps) => {
         aria-disabled={save.disabled}
         disabled={save.disabled}
       >
-        저장
+        {t("save")}
       </button>
     );
 
