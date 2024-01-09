@@ -1,4 +1,10 @@
+import dayjs from "dayjs";
 import { RefObject } from "react";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/ko";
+import "dayjs/locale/zh-cn";
+import "dayjs/locale/ja";
+import "dayjs/locale/en";
 
 export const classNames = (...classes: (boolean | string)[]) =>
   classes.filter(Boolean).join(" ");
@@ -33,14 +39,11 @@ export const formatTimeDifference = (createdAt: Date) => {
   const hours = minutes / 60;
   const days = hours / 24;
 
-  if (seconds < 60) return "방금 전";
-  if (minutes < 60) return `${Math.floor(minutes)}분 전`;
-  if (hours < 24) return `${Math.floor(hours)}시간 전`;
-  if (days < 3) return `${Math.floor(days)}일 전`;
+  if (seconds < 60 || minutes < 60 || hours < 24 || days < 3) {
+    const locale = "";
+    dayjs.extend(relativeTime);
+    return dayjs().locale("zh-cn").to(dayjs(createdAt));
+  }
 
-  const year = createdAt.getFullYear();
-  const month = (createdAt.getMonth() + 1).toString().padStart(2, "0");
-  const day = createdAt.getDate().toString().padStart(2, "0");
-
-  return `${year}년 ${month}월 ${day}일`;
+  return dayjs().locale("zh-cn").format("YYYY-MM-DD");
 };
