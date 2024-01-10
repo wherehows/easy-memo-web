@@ -11,6 +11,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "dayjs": "^1.11.10",
     "nanoid": "^5.0.4",
     "next": "14.0.4",
     "next-intl": "^3.4.1",

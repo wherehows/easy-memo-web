@@ -17,7 +17,7 @@ export const Index = {
           const titleToShow =
             title || content.substring(0, 20) || "제목이 없습니다";
 
-          const dateToShow = formatTimeDifference(new Date(date));
+          const dateToShow = formatTimeDifference(new Date(date), "ko");
 
           return (
             <li key={id}>
