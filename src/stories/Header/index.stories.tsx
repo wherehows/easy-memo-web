@@ -54,9 +54,6 @@ export const Index = {
             <Header.MiddleText text="삭제 페이지" />
             <Header.RightOption
               option={{
-                allSelection: {
-                  onClick: () => {},
-                },
                 remove: {
                   onClick: () => {},
                 },
