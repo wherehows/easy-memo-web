@@ -4,8 +4,10 @@ import { useStorage } from "@/hooks/useStorage";
 import Header from "@/stories/Header";
 import MemoItem, { MemoItemProps } from "@/stories/MemoItem";
 import { classNames, formatTimeDifference, getRefValue } from "@/utils/helpers";
+import { LOCALES } from "@/utils/navigation";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
+import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -13,6 +15,7 @@ type IsRemoveMapType = { [id: number]: boolean };
 
 const HomePage = () => {
   const t = useTranslations();
+  const { locale } = useParams();
 
   const memoListRef = useRef<HTMLUListElement>(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -132,7 +135,10 @@ const HomePage = () => {
                 const titleToShow =
                   title || content.substring(0, 20) || t("except.no-title");
 
-                const dateToShow = formatTimeDifference(new Date(date));
+                const dateToShow = formatTimeDifference(
+                  new Date(date),
+                  locale as (typeof LOCALES)[number]
+                );
 
                 return (
                   <li
@@ -159,7 +165,7 @@ const HomePage = () => {
                         >
                           {titleToShow}
                           <time className="text-sm text-gray-400">
-                            {dateToShow}에 작성됨
+                            {dateToShow}
                           </time>
                         </label>
                       </div>

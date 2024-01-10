@@ -1,10 +1,6 @@
-import dayjs from "dayjs";
 import { RefObject } from "react";
-import relativeTime from "dayjs/plugin/relativeTime";
-import "dayjs/locale/ko";
-import "dayjs/locale/zh-cn";
-import "dayjs/locale/ja";
-import "dayjs/locale/en";
+import { LOCALES } from "./navigation";
+import dayjs from "./dayjsExt";
 
 export const classNames = (...classes: (boolean | string)[]) =>
   classes.filter(Boolean).join(" ");
@@ -30,7 +26,10 @@ export const debounce = <T extends (...args: any[]) => any>(
 
 export const getRefValue = <C>(ref: RefObject<C>) => ref.current as C;
 
-export const formatTimeDifference = (createdAt: Date) => {
+export const formatTimeDifference = (
+  createdAt: Date,
+  locale: (typeof LOCALES)[number]
+) => {
   const now: Date = new Date();
   const milliSeconds = now.getTime() - createdAt.getTime();
 
@@ -40,10 +39,8 @@ export const formatTimeDifference = (createdAt: Date) => {
   const days = hours / 24;
 
   if (seconds < 60 || minutes < 60 || hours < 24 || days < 3) {
-    const locale = "";
-    dayjs.extend(relativeTime);
-    return dayjs().locale("zh-cn").to(dayjs(createdAt));
+    return dayjs().locale(locale).to(dayjs(createdAt));
   }
 
-  return dayjs().locale("zh-cn").format("YYYY-MM-DD");
+  return dayjs().locale(locale).format("YYYY-MM-DD");
 };
