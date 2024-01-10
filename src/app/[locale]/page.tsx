@@ -19,6 +19,7 @@ const HomePage = () => {
 
   const memoListRef = useRef<HTMLUListElement>(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [isAllMemoSelected, setIsAllMemoSelected] = useState(false);
 
   const [memoList, setMemoList] = useStorage<MemoItemProps[]>(
     "memo",
@@ -73,17 +74,6 @@ const HomePage = () => {
         {isEditing ? (
           <Header.RightOption
             option={{
-              // allSelection: {
-              //   onClick: () => {
-              //     const newState: IsRemoveMapType = {};
-
-              //     for (const key in isRemoveMap) {
-              //       newState[key] = true;
-              //     }
-
-              //     setIsRemoveMap(newState);
-              //   },
-              // },
               remove: {
                 disabled:
                   getNewMemoList(isRemoveMap, memoList).length ===
@@ -125,11 +115,31 @@ const HomePage = () => {
         )}
       </Header>
       <main className="main">
+        {isEditing && (
+          <div className="flex items-center">
+            <input
+              id="select-all-checkbox"
+              type="checkbox"
+              className="mr-[16px] w-4 h-4"
+              checked={isAllMemoSelected}
+              onChange={() => {
+                const newState: IsRemoveMapType = {};
+
+                for (const key in isRemoveMap) {
+                  newState[key] = !isAllMemoSelected;
+                }
+
+                setIsAllMemoSelected(!isAllMemoSelected);
+                setIsRemoveMap(newState);
+              }}
+            />
+            <label htmlFor="select-all-checkbox">
+              {t("mainPage.select-all")}
+            </label>
+          </div>
+        )}
         {sortedMemoList.length ? (
-          <ul
-            ref={memoListRef}
-            className="flex flex-col gap-[16px] pt-[8px] pb-[16px] px-[8px]"
-          >
+          <ul ref={memoListRef} className="flex flex-col gap-[16px]">
             {sortedMemoList.map(
               ({ id, title, date, content }: MemoItemProps) => {
                 const titleToShow =
@@ -152,12 +162,18 @@ const HomePage = () => {
                           type="checkbox"
                           className="mr-[16px] w-4 h-4"
                           checked={isRemoveMap[id] || false}
-                          onChange={() =>
-                            setIsRemoveMap({
+                          onChange={() => {
+                            const newState = {
                               ...isRemoveMap,
                               [id]: !isRemoveMap[id],
-                            })
-                          }
+                            };
+
+                            getNewMemoList(newState, memoList).length === 0
+                              ? setIsAllMemoSelected(true)
+                              : setIsAllMemoSelected(false);
+
+                            setIsRemoveMap(newState);
+                          }}
                         />
                         <label
                           htmlFor={`${id}-checkbox`}
