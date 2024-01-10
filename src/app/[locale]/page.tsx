@@ -73,17 +73,17 @@ const HomePage = () => {
         {isEditing ? (
           <Header.RightOption
             option={{
-              allSelection: {
-                onClick: () => {
-                  const newState: IsRemoveMapType = {};
+              // allSelection: {
+              //   onClick: () => {
+              //     const newState: IsRemoveMapType = {};
 
-                  for (const key in isRemoveMap) {
-                    newState[key] = true;
-                  }
+              //     for (const key in isRemoveMap) {
+              //       newState[key] = true;
+              //     }
 
-                  setIsRemoveMap(newState);
-                },
-              },
+              //     setIsRemoveMap(newState);
+              //   },
+              // },
               remove: {
                 disabled:
                   getNewMemoList(isRemoveMap, memoList).length ===
