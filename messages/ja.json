@@ -4,7 +4,6 @@
     "create": "写作",
     "close": "关闭",
     "back": "返回",
-    "select-all": "全选",
     "delete": "删除",
     "share": "共享",
     "save": "保存"
@@ -22,5 +21,8 @@
   "write": {
     "title": "",
     "content": ""
+  },
+  "mainPage": {
+    "select-all": "全选"
   }
 }
