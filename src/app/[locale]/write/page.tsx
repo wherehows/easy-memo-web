@@ -92,7 +92,7 @@ const WritePage = () => {
           }}
         />
       </Header>
-      <main className="main pt-[8px] pb-[16px] px-[8px]">
+      <main className="main">
         <div className="flex flex-col">
           <label htmlFor="title">{t("write.title")}</label>
           <input
