@@ -11,7 +11,6 @@ type RightOptionProps = XOR<
     option: {
       save?: IconButtonOption;
       remove?: IconButtonOption;
-      allSelection?: IconButtonOption;
       edit?: IconButtonOption;
       back?: boolean;
       write?: boolean;
@@ -28,13 +27,7 @@ const RightOption = ({ text, option }: RightOptionProps) => {
   }
 
   if (option) {
-    const { write, share, save, edit, remove, allSelection } = option;
-
-    const AllSelection = allSelection && "onClick" in allSelection && (
-      <button key="allSelection" onClick={allSelection.onClick}>
-        {t("select-all")}
-      </button>
-    );
+    const { write, share, save, edit, remove } = option;
 
     const Remove = remove && "onClick" in remove && (
       <button
@@ -84,7 +77,7 @@ const RightOption = ({ text, option }: RightOptionProps) => {
 
     return (
       <div className="flex gap-[18px]">
-        {[Share, Edit, Save, Write, AllSelection, Remove]}
+        {[Share, Edit, Save, Write, Remove]}
       </div>
     );
   }

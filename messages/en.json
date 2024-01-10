@@ -4,7 +4,6 @@
     "create": "create",
     "close": "close",
     "back": "back",
-    "select-all": "select all",
     "delete": "delete",
     "share": "share",
     "save": "save"
@@ -22,5 +21,8 @@
   "write": {
     "title": "title",
     "content": "content"
+  },
+  "mainPage": {
+    "select-all": "select all"
   }
 }

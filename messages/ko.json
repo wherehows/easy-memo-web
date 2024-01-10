@@ -4,7 +4,6 @@
     "create": "작성",
     "close": "닫기",
     "back": "뒤로가기",
-    "select-all": "전체 선택",
     "delete": "삭제",
     "share": "공유",
     "save": "저장"
@@ -25,5 +24,8 @@
   "write": {
     "title": "제목",
     "content": "내용"
+  },
+  "mainPage": {
+    "select-all": "전체 선택"
   }
 }
