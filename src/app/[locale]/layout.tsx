@@ -5,7 +5,7 @@ import appleGothic from "@/utils/font";
 import { Toaster } from "react-hot-toast";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import { ReactNode } from "react";
-import { locales } from "@/utils/navigation";
+import { LOCALES } from "@/utils/navigation";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +18,7 @@ export default function RootLayout({
 }: {
   children: ReactNode;
   params: {
-    locale: (typeof locales)[number];
+    locale: (typeof LOCALES)[number];
   };
 }) {
   const messages = useMessages();
