@@ -1,8 +1,8 @@
 "use client";
 
 import { useStorage } from "@/hooks/useStorage";
-import Header from "@/stories/Header";
-import MemoItem, { MemoItemProps } from "@/stories/MemoItem";
+import Header from "@/components/Header";
+import MemoItem, { MemoItemProps } from "@/components/MemoItem";
 import { classNames, formatTimeDifference, getRefValue } from "@/utils/helpers";
 import { LOCALES } from "@/utils/navigation";
 import { useTranslations } from "next-intl";
