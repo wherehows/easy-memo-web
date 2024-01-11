@@ -100,7 +100,7 @@ const WritePage = () => {
             type="text"
             ref={titleInputRef}
             maxLength={50}
-            className="text-black p-[8px] mb-[16px]"
+            className="text-white p-[8px] mb-[16px] bg-[#1e2126]"
             onChange={debounce(handleChangeTitle, 500)}
           />
         </div>
@@ -110,7 +110,7 @@ const WritePage = () => {
             id="content"
             ref={contentTextAreaRef}
             maxLength={2000}
-            className="h-[100%] text-black resize-none p-[8px]"
+            className="h-[100%] text-white resize-none p-[8px] bg-[#1e2126]"
             onChange={debounce(handleChangeContent, 500)}
           />
         </div>

@@ -100,7 +100,7 @@ const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
             ref={titleInputRef}
             defaultValue={title}
             maxLength={50}
-            className="text-black p-[8px] mb-[16px]"
+            className="bg-[#1e2126] text-whtie p-[8px] mb-[16px]"
             onChange={debounce(handleChangeTitle, 500)}
           />
         </div>
@@ -111,7 +111,7 @@ const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
             ref={contentTextAreaRef}
             maxLength={2000}
             defaultValue={content}
-            className="h-[100%] text-black resize-none p-[8px]"
+            className="h-[100%] text-white resize-none p-[8px] bg-[#1e2126]"
             onChange={debounce(handleChangeContent, 500)}
           />
         </div>
