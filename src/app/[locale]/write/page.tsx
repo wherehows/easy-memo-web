@@ -1,7 +1,7 @@
 "use client";
 
 import { useStorage } from "@/hooks/useStorage";
-import Header from "@/stories/Header";
+import Header from "@/components/Header";
 import { debounce } from "@/utils/helpers";
 import { checkedLocalStorage } from "@/utils/storage";
 import { customAlphabet } from "nanoid";

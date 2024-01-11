@@ -1,6 +1,6 @@
 "use client";
 
-import Header from "@/stories/Header";
+import Header from "@/components/Header";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 

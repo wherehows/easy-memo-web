@@ -1,8 +1,8 @@
 "use client";
 
 import { useStorage } from "@/hooks/useStorage";
-import Header from "@/stories/Header";
-import { MemoItemProps } from "@/stories/MemoItem";
+import Header from "@/components/Header";
+import { MemoItemProps } from "@/components/MemoItem";
 import { debounce } from "@/utils/helpers";
 import { checkedLocalStorage } from "@/utils/storage";
 import { useTranslations } from "next-intl";
