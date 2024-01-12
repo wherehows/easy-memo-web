@@ -2,6 +2,8 @@ import React from "react";
 import type { Preview } from "@storybook/react";
 import "../src/app/globals.css";
 import appleGothic from "../src/utils/font";
+import { NextIntlClientProvider } from "next-intl";
+import messages from "../messages/ko.json";
 
 const preview: Preview = {
   parameters: {
@@ -19,10 +21,12 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => {
-      return React.createElement(
-        "div",
-        { className: `${appleGothic.className} h-[100%]` },
-        React.createElement(Story)
+      return (
+        <NextIntlClientProvider locale="ko" messages={messages}>
+          <div className={`${appleGothic.className} h-[100%]`}>
+            <Story />
+          </div>
+        </NextIntlClientProvider>
       );
     },
   ],
