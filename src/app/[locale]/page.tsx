@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 
 type IsRemoveMapType = { [id: number]: boolean };
 
-const HomePage = () => {
+const MainPage = () => {
   const t = useTranslations();
   const { locale } = useParams();
 
@@ -206,7 +206,7 @@ const HomePage = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(HomePage), { ssr: false });
+export default dynamic(() => Promise.resolve(MainPage), { ssr: false });
 
 const getNewMemoList = (
   isRemoveMap: IsRemoveMapType,
