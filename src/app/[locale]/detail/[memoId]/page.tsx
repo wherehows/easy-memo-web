@@ -8,7 +8,8 @@ import { checkedLocalStorage } from "@/utils/storage";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import { notFound, useRouter } from "next/navigation";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useState } from "react";
+import toast from "react-hot-toast";
 
 interface DetailPageProps {
   params: { memoId: string };
@@ -18,8 +19,6 @@ const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
   const t = useTranslations();
 
   const router = useRouter();
-  const titleInputRef = useRef<HTMLInputElement>(null);
-  const contentTextAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const [currentMemo, setCurrentMemo] = useState(() => {
     let currentMemo = checkedLocalStorage
@@ -86,7 +85,17 @@ const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
         <Header.RightOption
           option={{
             save: {
-              onClick: () => {},
+              onClick: () => {
+                const priorMemoList = memoList.slice(0, -1);
+                setMemoList([...priorMemoList, currentMemo]);
+                toast(t("toast.save"), {
+                  duration: 2000,
+                  ariaProps: {
+                    role: "status",
+                    "aria-live": "polite",
+                  },
+                });
+              },
             },
           }}
         />
@@ -97,7 +106,6 @@ const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
           <input
             id="title"
             type="text"
-            ref={titleInputRef}
             defaultValue={title}
             maxLength={50}
             className="text-black p-[8px] mb-[16px]"
@@ -108,7 +116,6 @@ const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
           <label htmlFor="content">{t("write.content")}</label>
           <textarea
             id="content"
-            ref={contentTextAreaRef}
             maxLength={2000}
             defaultValue={content}
             className="h-[100%] text-black resize-none p-[8px]"
