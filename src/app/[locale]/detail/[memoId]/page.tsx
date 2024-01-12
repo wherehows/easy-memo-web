@@ -8,7 +8,8 @@ import { checkedLocalStorage } from "@/utils/storage";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import { notFound, useRouter } from "next/navigation";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useState } from "react";
+import toast from "react-hot-toast";
 
 interface DetailPageProps {
   params: { memoId: string };
@@ -84,7 +85,17 @@ const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
         <Header.RightOption
           option={{
             save: {
-              onClick: () => {},
+              onClick: () => {
+                const priorMemoList = memoList.slice(0, -1);
+                setMemoList([...priorMemoList, currentMemo]);
+                toast(t("toast.save"), {
+                  duration: 2000,
+                  ariaProps: {
+                    role: "status",
+                    "aria-live": "polite",
+                  },
+                });
+              },
             },
           }}
         />

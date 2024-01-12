@@ -8,7 +8,7 @@ import { customAlphabet } from "nanoid";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
 
 const WritePage = () => {
