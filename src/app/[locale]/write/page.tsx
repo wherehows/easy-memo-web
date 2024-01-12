@@ -15,8 +15,6 @@ const WritePage = () => {
   const t = useTranslations();
 
   const router = useRouter();
-  const titleInputRef = useRef<HTMLInputElement>(null);
-  const contentTextAreaRef = useRef<HTMLTextAreaElement>(null);
   const [currentMemo, setCurrentMemo] = useState(() => {
     const currentMemo = {
       id: getId(),
@@ -98,7 +96,6 @@ const WritePage = () => {
           <input
             id="title"
             type="text"
-            ref={titleInputRef}
             maxLength={50}
             className="text-black p-[8px] mb-[16px]"
             onChange={debounce(handleChangeTitle, 500)}
@@ -108,7 +105,6 @@ const WritePage = () => {
           <label htmlFor="content">{t("write.content")}</label>
           <textarea
             id="content"
-            ref={contentTextAreaRef}
             maxLength={2000}
             className="h-[100%] text-black resize-none p-[8px]"
             onChange={debounce(handleChangeContent, 500)}

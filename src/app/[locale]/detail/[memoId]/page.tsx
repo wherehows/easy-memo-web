@@ -18,8 +18,6 @@ const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
   const t = useTranslations();
 
   const router = useRouter();
-  const titleInputRef = useRef<HTMLInputElement>(null);
-  const contentTextAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const [currentMemo, setCurrentMemo] = useState(() => {
     let currentMemo = checkedLocalStorage
@@ -97,7 +95,6 @@ const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
           <input
             id="title"
             type="text"
-            ref={titleInputRef}
             defaultValue={title}
             maxLength={50}
             className="text-black p-[8px] mb-[16px]"
@@ -108,7 +105,6 @@ const DetailPage = ({ params: { memoId } }: DetailPageProps) => {
           <label htmlFor="content">{t("write.content")}</label>
           <textarea
             id="content"
-            ref={contentTextAreaRef}
             maxLength={2000}
             defaultValue={content}
             className="h-[100%] text-black resize-none p-[8px]"
