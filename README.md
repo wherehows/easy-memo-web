@@ -7,7 +7,7 @@ Memo Web for the Visually Impaired
 - Utilizing semantic tags
 - Incorporating WAI-ARIA attributes
 - Employing libraries that support accessibility
-2. Ad Block
+2. ad free
 3. Minimizing Features
 4. Multilingual Support
 
