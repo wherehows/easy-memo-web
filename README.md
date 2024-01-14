@@ -9,7 +9,7 @@ Memo Web for the Visually Impaired
 - Employing libraries that support accessibility
 2. ad free
 3. Minimizing Features
-4. Multilingual Support
+4. i18n support
 
 ## Planned Additional Features
 1. Login
