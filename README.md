@@ -11,3 +11,7 @@ Memo Web for the Visually Impaired
 3. Minimizing Features
 4. Multilingual Support
 
+## Planned Additional Features
+1. Login
+2. Filter
+3. Various Theme
