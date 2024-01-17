@@ -1,24 +1,16 @@
 "use client";
 
-import { useStorage } from "@/hooks/useStorage";
-import Header from "@/components/Header";
-import { debounce } from "@/utils/helpers";
 import { checkedLocalStorage } from "@/utils/storage";
 import { customAlphabet } from "nanoid";
-import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
-import toast from "react-hot-toast";
+import { useState } from "react";
+import WriteTemplate from "@/components/WriteTemplate";
 
 const WritePage = () => {
-  const t = useTranslations();
-
-  const router = useRouter();
   const [currentMemo, setCurrentMemo] = useState(() => {
     const currentMemo = {
-      id: getId(),
-      date: new Date(),
+      id: generateId(),
+      date: `${new Date()}`,
       title: "",
       content: "",
     };
@@ -31,93 +23,17 @@ const WritePage = () => {
     return currentMemo;
   });
 
-  const [memoList, setMemoList] = useStorage("memo", [], "localStorage");
-
-  const handleChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const priorMemoList = memoList.slice(0, -1);
-
-    const newMemoState = {
-      ...currentMemo,
-      content: e.target.value,
-    };
-
-    setCurrentMemo(newMemoState);
-    setMemoList([...priorMemoList, newMemoState]);
-  };
-
-  const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    const priorMemoList = memoList.slice(0, -1);
-
-    const newMemoState = {
-      ...currentMemo,
-      title: e.target.value,
-    };
-
-    setCurrentMemo(newMemoState);
-    setMemoList([...priorMemoList, newMemoState]);
-  };
-
   return (
-    <>
-      <Header>
-        <Header.LeftOption
-          option={{
-            back: {
-              onClick: () => {
-                router.replace("/");
-              },
-            },
-          }}
-        />
-        <Header.RightOption
-          option={{
-            share: {
-              onClick: () => {},
-            },
-            save: {
-              onClick: () => {
-                const priorMemoList = memoList.slice(0, -1);
-                setMemoList([...priorMemoList, currentMemo]);
-                toast(t("toast.save"), {
-                  duration: 2000,
-                  ariaProps: {
-                    role: "status",
-                    "aria-live": "polite",
-                  },
-                });
-              },
-            },
-          }}
-        />
-      </Header>
-      <main className="main">
-        <div className="flex flex-col">
-          <label htmlFor="title">{t("write.title")}</label>
-          <input
-            id="title"
-            type="text"
-            maxLength={50}
-            className="text-black p-[8px] mb-[16px]"
-            onChange={debounce(handleChangeTitle, 500)}
-          />
-        </div>
-        <div className="flex flex-col grow">
-          <label htmlFor="content">{t("write.content")}</label>
-          <textarea
-            id="content"
-            maxLength={2000}
-            className="h-[100%] text-black resize-none p-[8px]"
-            onChange={debounce(handleChangeContent, 500)}
-          />
-        </div>
-      </main>
-    </>
+    <WriteTemplate
+      currentMemo={currentMemo}
+      onWriteMemo={(newMemo) => setCurrentMemo(newMemo)}
+    />
   );
 };
 
 export default dynamic(() => Promise.resolve(WritePage), { ssr: false });
 
-const getId = () => {
+const generateId = () => {
   let id = customAlphabet("1234567890abcdefghijklmn", 7)();
   let duplicated = true;
 
