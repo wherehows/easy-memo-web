@@ -11,7 +11,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
-type IsRemoveMapType = { [id: number]: boolean };
+type IsRemoveMapType = { [id: string]: boolean };
 
 const MainPage = () => {
   const t = useTranslations();

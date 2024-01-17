@@ -1,7 +1,7 @@
 import { Link } from "@/utils/navigation";
 
 export interface MemoItemProps {
-  id: number;
+  id: string;
   title: string;
   content: string;
   date: string;

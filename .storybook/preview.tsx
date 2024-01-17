@@ -23,7 +23,7 @@ const preview: Preview = {
     (Story) => {
       return (
         <NextIntlClientProvider locale="ko" messages={messages}>
-          <div className={`${appleGothic.className} h-[100%]`}>
+          <div className={`${appleGothic.className} flex flex-col h-[100%]`}>
             <Story />
           </div>
         </NextIntlClientProvider>
