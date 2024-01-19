@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  @apply h-[100%] bg-black;
+  @apply h-[100%];
 }
 
 body {
