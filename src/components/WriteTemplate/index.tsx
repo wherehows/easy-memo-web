@@ -82,7 +82,7 @@ const WriteTemplate = ({ currentMemo, onWriteMemo }: WriteTemplateProps) => {
             type="text"
             defaultValue={title}
             maxLength={50}
-            className="text-black p-2 mb-4 rounded-md"
+            className="text-white p-2 mb-4 rounded-md bg-[#1e2126]"
             onChange={debounce(handleChangeTitle, 500)}
           />
         </div>
@@ -92,7 +92,7 @@ const WriteTemplate = ({ currentMemo, onWriteMemo }: WriteTemplateProps) => {
             id="content"
             maxLength={2000}
             defaultValue={content}
-            className="h-[100%] text-black resize-none p-2 rounded-md"
+            className="h-[100%] text-white resize-none p-2 rounded-md bg-[#1e2126]"
             onChange={debounce(handleChangeContent, 500)}
           />
         </div>
