@@ -76,23 +76,27 @@ const WriteTemplate = ({ currentMemo, onWriteMemo }: WriteTemplateProps) => {
       </Header>
       <main className="main">
         <div className="flex flex-col">
-          <label htmlFor="title">{t("write.title")}</label>
+          <label htmlFor="title" className="mb-1">
+            {t("write.title")}
+          </label>
           <input
             id="title"
             type="text"
             defaultValue={title}
             maxLength={50}
-            className="text-black p-2 mb-4 rounded-md"
+            className="text-white p-2 mb-4 rounded-md bg-[#1e2126]"
             onChange={debounce(handleChangeTitle, 500)}
           />
         </div>
         <div className="flex flex-col grow">
-          <label htmlFor="content">{t("write.content")}</label>
+          <label htmlFor="content" className="mb-1">
+            {t("write.content")}
+          </label>
           <textarea
             id="content"
             maxLength={2000}
             defaultValue={content}
-            className="h-[100%] text-black resize-none p-2 rounded-md"
+            className="h-[100%] text-white resize-none p-2 rounded-md bg-[#1e2126]"
             onChange={debounce(handleChangeContent, 500)}
           />
         </div>

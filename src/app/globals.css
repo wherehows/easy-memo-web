@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  @apply h-[100%] bg-black;
+  @apply h-[100%];
 }
 
 body {
@@ -18,7 +18,7 @@ body {
 
 @layer components {
   .main {
-    @apply flex flex-col grow pt-[8px] pb-[16px] px-[8px];
+    @apply flex flex-col grow pb-[16px] px-[8px];
   }
 
   .center {
