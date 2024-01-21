@@ -1,24 +1,17 @@
 "use client";
 
-import { IconButtonOption, XOR } from "@/types/common";
+import { IconButtonOption } from "@/types/common";
 import { useTranslations } from "next-intl";
 
-type LeftOptionProps = XOR<
-  {
-    option: {
-      back?: IconButtonOption;
-      close?: IconButtonOption;
-    };
-  },
-  { empty: boolean }
->;
+type LeftOptionProps = {
+  option: {
+    back?: IconButtonOption;
+    close?: IconButtonOption;
+  };
+};
 
-const LeftOption = ({ empty, option }: LeftOptionProps) => {
+const LeftOption = ({ option }: LeftOptionProps) => {
   const t = useTranslations("header");
-
-  if (empty) {
-    return <div />;
-  }
 
   if (option) {
     const { back, close } = option;

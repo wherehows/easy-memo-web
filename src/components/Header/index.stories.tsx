@@ -12,13 +12,12 @@ export const Index = {
       <>
         <div className="relative">
           <Header>
-            <Header.LeftOption empty />
-            <Header.MiddleText text="메인 페이지" />
             <Header.RightOption
               option={{
                 edit: {
                   onClick: () => {},
                 },
+                write: true,
               }}
             />
           </Header>
@@ -32,7 +31,7 @@ export const Index = {
                 },
               }}
             />
-            <Header.MiddleText text="상세 페이지" />
+            <Header.MiddleText text="작성 페이지" />
             <Header.RightOption
               option={{
                 save: {
@@ -46,12 +45,11 @@ export const Index = {
           <Header>
             <Header.LeftOption
               option={{
-                back: {
+                close: {
                   onClick: () => {},
                 },
               }}
             />
-            <Header.MiddleText text="삭제 페이지" />
             <Header.RightOption
               option={{
                 remove: {
