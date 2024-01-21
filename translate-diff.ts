@@ -21,7 +21,7 @@ const deepCompareAndTranslation = (origin: any, comp: any, lang: any) => {
   }
 
   if (typeof origin === "string") {
-    return "새롭게 삽입된 필드";
+    return origin;
   }
 
   if (typeof origin === "object") {
