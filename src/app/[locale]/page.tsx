@@ -38,16 +38,6 @@ const MainPage = () => {
     }, {} as IsRemoveMapType)
   );
 
-  useEffect(() => {
-    if (isEditing) {
-      const { firstChild } = getRefValue(memoListRef);
-
-      if (firstChild instanceof Element) {
-        firstChild.querySelector("input")?.focus();
-      }
-    }
-  }, [isEditing]);
-
   return (
     <>
       <Header>
@@ -81,15 +71,12 @@ const MainPage = () => {
                       memoList.length,
                     onClick: () => {
                       const newMemoList = getNewMemoList(isRemoveMap, memoList);
-
                       const count = memoList.length - newMemoList.length;
-                      const confirmMessage = t("dialog.remove", { count });
-                      const toastMessage = t("toast.remove");
 
-                      if (confirm(confirmMessage)) {
+                      if (confirm(t("dialog.remove", { count }))) {
                         setMemoList(newMemoList);
                         setIsEditing(false);
-                        toast(toastMessage, {
+                        toast(t("toast.remove"), {
                           duration: 3000,
                           ariaProps: {
                             role: "status",
@@ -114,7 +101,7 @@ const MainPage = () => {
       </Header>
       <main className="main">
         {isEditing && (
-          <div className="flex items-center">
+          <div className="flex items-center mb-2">
             <input
               id="select-all-checkbox"
               type="checkbox"
