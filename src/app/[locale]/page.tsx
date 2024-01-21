@@ -101,7 +101,7 @@ const MainPage = () => {
       </Header>
       <main className="main">
         {isEditing && (
-          <div className="flex items-center">
+          <div className="flex items-center mb-2">
             <input
               id="select-all-checkbox"
               type="checkbox"
