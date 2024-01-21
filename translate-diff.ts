@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 const translationsFolder = "./messages/";
-const languages = ["zh-cn", "ja", "en"];
+const languages = ["ja", "en", "ko"];
 
 interface TranslationObject {
   [key: string]: string | TranslationObject;

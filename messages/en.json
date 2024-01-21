@@ -9,16 +9,19 @@
     "save": "save"
   },
   "toast": {
-    "remove": "The memo has been deleted",
-    "save": "It's been saved"
+    "remove": "The memo has been deleted.",
+    "save": "It's been saved."
+  },
+  "alert": {
+    "storage": "There is a problem with the storage space."
   },
   "dialog": {
     "remove": "Would you like to delete {count, plural, =0 {# memo} =1 {1 memo} other {# memos}}?"
   },
   "except": {
-    "404": "This page does not exist",
-    "empty": "There are no written memos. Please write a memo",
-    "no-title": "No title"
+    "404": "This page does not exist.",
+    "empty": "There are no written memos. Please write a memo.",
+    "no-title": "No title."
   },
   "write": {
     "title": "title",
@@ -26,8 +29,5 @@
   },
   "mainPage": {
     "select-all": "select all"
-  },
-  "alert": {
-    "storage": "There is a problem with the storage space"
   }
 }
