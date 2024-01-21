@@ -71,15 +71,12 @@ const MainPage = () => {
                       memoList.length,
                     onClick: () => {
                       const newMemoList = getNewMemoList(isRemoveMap, memoList);
-
                       const count = memoList.length - newMemoList.length;
-                      const confirmMessage = t("dialog.remove", { count });
-                      const toastMessage = t("toast.remove");
 
-                      if (confirm(confirmMessage)) {
+                      if (confirm(t("dialog.remove", { count }))) {
                         setMemoList(newMemoList);
                         setIsEditing(false);
-                        toast(toastMessage, {
+                        toast(t("toast.remove"), {
                           duration: 3000,
                           ariaProps: {
                             role: "status",
