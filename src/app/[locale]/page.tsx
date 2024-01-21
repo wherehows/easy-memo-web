@@ -51,68 +51,66 @@ const MainPage = () => {
   return (
     <>
       <Header>
-        {isEditing ? (
-          <Header.LeftOption
-            option={{
-              close: {
-                onClick: () => {
-                  const newIsRemoveMap: IsRemoveMapType = {};
+        <Header.LeftOption
+          option={
+            isEditing
+              ? {
+                  close: {
+                    onClick: () => {
+                      const newIsRemoveMap: IsRemoveMapType = {};
 
-                  for (const key in isRemoveMap) {
-                    newIsRemoveMap[key] = false;
-                  }
+                      for (const key in isRemoveMap) {
+                        newIsRemoveMap[key] = false;
+                      }
 
-                  setIsEditing(false);
-                  setIsRemoveMap(newIsRemoveMap);
-                },
-              },
-            }}
-          />
-        ) : (
-          <Header.LeftOption empty />
-        )}
-        {isEditing ? (
-          <Header.RightOption
-            option={{
-              remove: {
-                disabled:
-                  getNewMemoList(isRemoveMap, memoList).length ===
-                  memoList.length,
-                onClick: () => {
-                  const newMemoList = getNewMemoList(isRemoveMap, memoList);
+                      setIsEditing(false);
+                      setIsRemoveMap(newIsRemoveMap);
+                    },
+                  },
+                }
+              : {}
+          }
+        />
+        <Header.RightOption
+          option={
+            isEditing
+              ? {
+                  remove: {
+                    disabled:
+                      getNewMemoList(isRemoveMap, memoList).length ===
+                      memoList.length,
+                    onClick: () => {
+                      const newMemoList = getNewMemoList(isRemoveMap, memoList);
 
-                  const count = memoList.length - newMemoList.length;
-                  const confirmMessage = t("dialog.remove", { count });
-                  const toastMessage = t("toast.remove");
+                      const count = memoList.length - newMemoList.length;
+                      const confirmMessage = t("dialog.remove", { count });
+                      const toastMessage = t("toast.remove");
 
-                  if (confirm(confirmMessage)) {
-                    setMemoList(newMemoList);
-                    setIsEditing(false);
-                    toast(toastMessage, {
-                      duration: 3000,
-                      ariaProps: {
-                        role: "status",
-                        "aria-live": "polite",
-                      },
-                    });
-                  }
-                },
-              },
-            }}
-          />
-        ) : (
-          <Header.RightOption
-            option={{
-              edit: {
-                disabled: !sortedMemoList.length,
-                onClick: () => {
-                  setIsEditing(true);
-                },
-              },
-              write: true,
-            }}
-          />
-        )}
+                      if (confirm(confirmMessage)) {
+                        setMemoList(newMemoList);
+                        setIsEditing(false);
+                        toast(toastMessage, {
+                          duration: 3000,
+                          ariaProps: {
+                            role: "status",
+                            "aria-live": "polite",
+                          },
+                        });
+                      }
+                    },
+                  },
+                }
+              : {
+                  edit: {
+                    disabled: !sortedMemoList.length,
+                    onClick: () => {
+                      setIsEditing(true);
+                    },
+                  },
+                  write: true,
+                }
+          }
+        />
       </Header>
       <main className="main">
         {isEditing && (
