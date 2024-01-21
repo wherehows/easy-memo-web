@@ -76,8 +76,10 @@ const RightOption = ({ text, option }: RightOptionProps) => {
     );
 
     return (
-      <div className="flex gap-[18px]">
-        {[Share, Edit, Save, Write, Remove]}
+      <div className="flex grow flex-row-reverse">
+        <div className="flex gap-[18px]">
+          {[Share, Edit, Save, Write, Remove]}
+        </div>
       </div>
     );
   }
