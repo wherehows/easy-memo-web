@@ -1,28 +1,33 @@
 {
   "header": {
-    "edit": "编辑",
-    "create": "写作",
-    "close": "关闭",
-    "back": "返回",
-    "delete": "删除",
-    "share": "共享",
+    "edit": "編集",
+    "create": "作成",
+    "close": "閉じる",
+    "back": "戻る",
+    "delete": "削除",
+    "share": "共有",
     "save": "保存"
   },
   "toast": {
-    "remove": "备忘录已被删除",
-    "save": ""
+    "remove": "メモが削除されました",
+    "save": "保存されました。"
+  },
+  "alert": {
+    "storage": "保存スペースに問題があります。"
   },
   "dialog": {
-    "remove": "您确定要删除{count, plural, =0 {#} =1 {#} other {#}}条备忘录吗？"
+    "remove": "{count, plural, =0 {#} =1 {#} other {#}}個のメモを削除しますか？"
   },
   "except": {
-    "empty": ""
+    "no-title": "タイトルがありません。",
+    "empty": "作成されたメモがありません。メモを作成してください。",
+    "404": "存在しないページです。"
   },
   "write": {
-    "title": "",
-    "content": ""
+    "title": "タイトル",
+    "content": "内容"
   },
   "mainPage": {
-    "select-all": "全选"
+    "select-all": "全体選択"
   }
 }

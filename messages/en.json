@@ -12,6 +12,9 @@
     "remove": "The memo has been deleted",
     "save": "It's been saved"
   },
+  "alert": {
+    "storage": "There is a problem with the storage space"
+  },
   "dialog": {
     "remove": "Would you like to delete {count, plural, =0 {# memo} =1 {1 memo} other {# memos}}?"
   },
@@ -26,8 +29,5 @@
   },
   "mainPage": {
     "select-all": "select all"
-  },
-  "alert": {
-    "storage": "There is a problem with the storage space"
   }
 }
