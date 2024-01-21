@@ -38,16 +38,6 @@ const MainPage = () => {
     }, {} as IsRemoveMapType)
   );
 
-  useEffect(() => {
-    if (isEditing) {
-      const { firstChild } = getRefValue(memoListRef);
-
-      if (firstChild instanceof Element) {
-        firstChild.querySelector("input")?.focus();
-      }
-    }
-  }, [isEditing]);
-
   return (
     <>
       <Header>
