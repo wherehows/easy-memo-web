@@ -1,22 +1,29 @@
-export const isStorageAvailable = (type: "localStorage" | "sessionStorage") => {
+export const isStorageNotAvailable = (
+  type: "localStorage" | "sessionStorage"
+) => {
   let storage;
+
   try {
     storage = window[type];
     const x = "__storage_test__";
     storage.setItem(x, x);
     storage.removeItem(x);
-    return true;
+    return false;
   } catch (e) {
     // ref: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#testing_for_availability
-    return (
-      e instanceof DOMException &&
-      (e.code === 22 ||
-        e.code === 1014 ||
-        e.name === "QuotaExceededError" ||
-        e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
-      storage &&
-      storage.length !== 0
-    );
+    if (e instanceof DOMException) {
+      if (e.code === 22) {
+        return "error code - 22";
+      } else if (e.code === 1014) {
+        return "error code - 1014";
+      } else if (e.name === "QuotaExceededError") {
+        return "error name - QuotaExceededError";
+      } else if (e.name === "NS_ERROR_DOM_QUOTA_REACHED") {
+        return "error name - NS_ERROR_DOM_QUOTA_REACHED";
+      }
+    }
+
+    return true;
   }
 };
 
