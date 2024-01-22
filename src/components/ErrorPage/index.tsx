@@ -20,12 +20,10 @@ const ErrorPage = ({ error }: ErrorPageProps) => {
           }}
         />
       </Header>
-      <main className="main">
-        <div className="grow center text-gray-400 flex flex-col">
-          <h2>Error!</h2>
-          {error.name && <div>error name is {error.name}</div>}
-          {error.message && <div>error message is {error.message}</div>}
-        </div>
+      <main className="main center text-gray-400">
+        <h2>Error!</h2>
+        {error.name && <div>error name is {error.name}</div>}
+        {error.message && <div>error message is {error.message}</div>}
       </main>
     </>
   );
