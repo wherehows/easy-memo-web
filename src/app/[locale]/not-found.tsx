@@ -21,9 +21,7 @@ const NotFoundPage = () => {
           }}
         />
       </Header>
-      <main className="main">
-        <div className="grow center text-gray-400">{t("except.404")}</div>
-      </main>
+      <main className="main center text-gray-400">{t("except.404")}</main>
     </>
   );
 };
