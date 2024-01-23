@@ -3,7 +3,7 @@
 import { useStorage } from "@/hooks/useStorage";
 import Header from "@/components/Header";
 import MemoItem, { MemoItemProps } from "@/components/MemoItem";
-import { classNames, formatTimeDifference, postMessage } from "@/utils/helpers";
+import { classNames, formatTimeDifference } from "@/utils/helpers";
 import { LOCALES } from "@/utils/navigation";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
