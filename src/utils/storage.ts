@@ -27,7 +27,7 @@ export const checkedLocalStorage = {
     try {
       if (jsonValue) return JSON.parse(jsonValue);
     } catch (error: any) {
-      alert(`저장 공간에 문제가 있어요. ${error.message}`);
+      alert(`There is a problem with the storage space. ${error.message}`);
       localStorage.setItem(key, JSON.stringify(defaultValue));
     }
 
@@ -48,7 +48,7 @@ export const checkedSessionStorage = {
     try {
       if (jsonValue) return JSON.parse(jsonValue);
     } catch (error: any) {
-      alert(`저장 공간에 문제가 있어요. ${error.message}`);
+      alert(`There is a problem with the storage space. ${error.message}`);
       sessionStorage.setItem(key, JSON.stringify(defaultValue));
     }
 
