@@ -3,12 +3,12 @@
 import { useStorage } from "@/hooks/useStorage";
 import Header from "@/components/Header";
 import MemoItem, { MemoItemProps } from "@/components/MemoItem";
-import { classNames, formatTimeDifference, getRefValue } from "@/utils/helpers";
+import { classNames, formatTimeDifference } from "@/utils/helpers";
 import { LOCALES } from "@/utils/navigation";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import { useParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 type IsRemoveMapType = { [id: string]: boolean };
