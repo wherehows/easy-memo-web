@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import { ReactNode } from "react";
 import { LOCALES } from "@/utils/navigation";
+import EventHandler from "@/components/EventHandler";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -34,6 +35,7 @@ export default function RootLayout({
               inset: "16px 16px 60px 16px",
             }}
           />
+          <EventHandler />
           {children}
         </NextIntlClientProvider>
       </body>
