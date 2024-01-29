@@ -45,7 +45,7 @@ export const formatTimeDifference = (
   return dayjs().locale(locale).format("YYYY-MM-DD");
 };
 
-export const postMessage = <T>(type: string, data: T) =>
+export const postMessage = <T>(type: string, data?: T) =>
   window.ReactNativeWebView.postMessage(
     JSON.stringify({
       type,
