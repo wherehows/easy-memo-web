@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "../globals.css";
-import Script from "next/script";
 import appleGothic from "@/utils/font";
 import { Toaster } from "react-hot-toast";
 import { NextIntlClientProvider, useMessages } from "next-intl";
@@ -26,7 +25,6 @@ export default function RootLayout({
 
   return (
     <html lang={locale}>
-      <Script src="https://kit.fontawesome.com/48e58babbf.js" />
       <body className={appleGothic.className}>
         <NextIntlClientProvider messages={messages} locale={locale}>
           <Toaster
