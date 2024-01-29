@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import "../globals.css";
-import Script from "next/script";
 import appleGothic from "@/utils/font";
 import { Toaster } from "react-hot-toast";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import { ReactNode } from "react";
 import { LOCALES } from "@/utils/navigation";
+import EventHandler from "@/components/EventHandler";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,7 +25,6 @@ export default function RootLayout({
 
   return (
     <html lang={locale}>
-      <Script src="https://kit.fontawesome.com/48e58babbf.js" />
       <body className={appleGothic.className}>
         <NextIntlClientProvider messages={messages} locale={locale}>
           <Toaster
@@ -34,6 +33,7 @@ export default function RootLayout({
               inset: "16px 16px 60px 16px",
             }}
           />
+          <EventHandler />
           {children}
         </NextIntlClientProvider>
       </body>

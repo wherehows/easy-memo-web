@@ -3,13 +3,14 @@
 import { useStorage } from "@/hooks/useStorage";
 import Header from "@/components/Header";
 import MemoItem, { MemoItemProps } from "@/components/MemoItem";
-import { classNames, formatTimeDifference } from "@/utils/helpers";
+import { classNames, formatTimeDifference, postMessage } from "@/utils/helpers";
 import { LOCALES } from "@/utils/navigation";
 import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import { useParams } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { checkStorageAvailability } from "@/utils/storage";
 
 type IsRemoveMapType = { [id: string]: boolean };
 
@@ -37,6 +38,15 @@ const MainPage = () => {
       return acc;
     }, {} as IsRemoveMapType)
   );
+
+  useEffect(() => {
+    const [isAvailable, reason] = checkStorageAvailability("localStorage");
+
+    if (!isAvailable) {
+      alert(`${t("alert.storage")}. ${reason}`);
+      postMessage("STORAGE_ERROR", "");
+    }
+  }, [t]);
 
   return (
     <>

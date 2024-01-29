@@ -1,30 +1,32 @@
-export const isStorageNotAvailable = (
+export const checkStorageAvailability = (
   type: "localStorage" | "sessionStorage"
 ) => {
-  let storage;
+  let isAvailable = false;
+  let reason = "";
+  let storage = null;
 
   try {
     storage = window[type];
     const x = "__storage_test__";
     storage.setItem(x, x);
     storage.removeItem(x);
-    return false;
+    isAvailable = true;
   } catch (e) {
     // ref: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#testing_for_availability
     if (e instanceof DOMException) {
+      isAvailable = false;
       if (e.code === 22) {
-        return "error code - 22";
+        reason = "error code - 22";
       } else if (e.code === 1014) {
-        return "error code - 1014";
+        reason = "error code - 1014";
       } else if (e.name === "QuotaExceededError") {
-        return "error name - QuotaExceededError";
+        reason = "error name - QuotaExceededError";
       } else if (e.name === "NS_ERROR_DOM_QUOTA_REACHED") {
-        return "error name - NS_ERROR_DOM_QUOTA_REACHED";
+        reason = "error name - NS_ERROR_DOM_QUOTA_REACHED";
       }
     }
-
-    return true;
   }
+  return [isAvailable, reason];
 };
 
 export const checkedLocalStorage = {
