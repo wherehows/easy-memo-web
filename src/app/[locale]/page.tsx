@@ -38,6 +38,15 @@ const MainPage = () => {
     }, {} as IsRemoveMapType)
   );
 
+  useEffect(() => {
+    const [isAvailable, reason] = checkStorageAvailability("localStorage");
+
+    if (!isAvailable) {
+      alert(`${t("alert.storage")}. ${reason}`);
+      postMessage("STORAGE_ERROR", "");
+    }
+  }, [t]);
+
   return (
     <>
       <Header>
