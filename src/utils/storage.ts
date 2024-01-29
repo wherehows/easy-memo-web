@@ -1,7 +1,7 @@
 export const checkStorageAvailability = (
   type: "localStorage" | "sessionStorage"
 ) => {
-  let availability = false;
+  let isAvailable = false;
   let reason = "";
   let storage = null;
 
@@ -10,11 +10,11 @@ export const checkStorageAvailability = (
     const x = "__storage_test__";
     storage.setItem(x, x);
     storage.removeItem(x);
-    availability = true;
+    isAvailable = true;
   } catch (e) {
     // ref: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API#testing_for_availability
     if (e instanceof DOMException) {
-      availability = false;
+      isAvailable = false;
       if (e.code === 22) {
         reason = "error code - 22";
       } else if (e.code === 1014) {
@@ -26,7 +26,7 @@ export const checkStorageAvailability = (
       }
     }
   }
-  return [availability, reason];
+  return [isAvailable, reason];
 };
 
 export const checkedLocalStorage = {
