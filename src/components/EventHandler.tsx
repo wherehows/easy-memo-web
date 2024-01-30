@@ -1,13 +1,12 @@
 "use client";
 
-import { postMessage } from "@/utils/helpers";
+import { getURLWithoutDomain, postMessage } from "@/utils/helpers";
 import { LOCALES } from "@/utils/navigation";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const EventHandler = () => {
   const router = useRouter();
-  const pathname = usePathname();
 
   useEffect(() => {
     const handleMessage = (event: Event) => {
@@ -16,7 +15,7 @@ const EventHandler = () => {
 
         switch (type) {
           case "BACK_PRESS": {
-            if (LOCALES.some((lang) => `/${lang}` === pathname)) {
+            if (LOCALES.some((lang) => `/${lang}` === getURLWithoutDomain())) {
               postMessage("EXIT_APP");
               break;
             }
@@ -46,7 +45,7 @@ const EventHandler = () => {
         document.removeEventListener("message", handleMessage);
       }
     };
-  }, [pathname, router]);
+  }, [router]);
 
   return null;
 };
