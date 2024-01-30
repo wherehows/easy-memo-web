@@ -45,10 +45,16 @@ export const formatTimeDifference = (
   return dayjs().locale(locale).format("YYYY-MM-DD");
 };
 
-export const postMessage = <T>(type: string, data: T) =>
+export const postMessage = <T>(type: string, data?: T) =>
   window.ReactNativeWebView.postMessage(
     JSON.stringify({
       type,
       data,
     })
   );
+
+export const getURLWithoutDomain = () => {
+  const currentURL = window.location.href;
+  const urlObject = new URL(currentURL);
+  return urlObject.pathname + urlObject.search;
+};
