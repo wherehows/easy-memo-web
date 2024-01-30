@@ -52,3 +52,9 @@ export const postMessage = <T>(type: string, data?: T) =>
       data,
     })
   );
+
+export const getURLWithoutDomain = () => {
+  const currentURL = window.location.href;
+  const urlObject = new URL(currentURL);
+  return urlObject.pathname + urlObject.search;
+};
