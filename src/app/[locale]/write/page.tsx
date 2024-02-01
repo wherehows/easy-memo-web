@@ -9,7 +9,7 @@ import WriteTemplate from "@/components/WriteTemplate";
 const WritePage = () => {
   const [currentMemo, setCurrentMemo] = useState(() => {
     const currentMemo = {
-      id: generateId(),
+      id: getId(),
       date: `${new Date()}`,
       title: "",
       content: "",
@@ -33,7 +33,7 @@ const WritePage = () => {
 
 export default dynamic(() => Promise.resolve(WritePage), { ssr: false });
 
-const generateId = () => {
+const getId = () => {
   let id = customAlphabet("1234567890abcdefghijklmn", 7)();
   let duplicated = true;
 
