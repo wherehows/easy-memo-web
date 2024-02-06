@@ -85,14 +85,12 @@ const MainPage = () => {
 
                     return (
                       <li key={id}>
-                        {
-                          <MemoItem
-                            id={id}
-                            date={dateToShow}
-                            title={titleToShow}
-                            content={content}
-                          />
-                        }
+                        <MemoItem
+                          id={id}
+                          date={dateToShow}
+                          title={titleToShow}
+                          content={content}
+                        />
                       </li>
                     );
                   }
