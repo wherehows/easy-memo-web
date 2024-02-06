@@ -17,8 +17,6 @@ import { useEffect } from "react";
 import { checkStorageAvailability } from "@/utils/storage";
 import EditModal from "@/components/EditModal";
 
-type IsRemoveMapType = { [id: string]: boolean };
-
 const MainPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -113,11 +111,3 @@ const MainPage = () => {
 };
 
 export default dynamic(() => Promise.resolve(MainPage), { ssr: false });
-
-const getNewMemoList = (
-  isRemoveMap: IsRemoveMapType,
-  memoList: MemoItemProps[]
-) =>
-  memoList.filter((memo) => {
-    return isRemoveMap[memo.id] ? false : true;
-  });
