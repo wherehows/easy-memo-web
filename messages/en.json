@@ -10,7 +10,8 @@
   },
   "toast": {
     "remove": "The memo has been deleted.",
-    "save": "It's been saved."
+    "save": "It's been saved.",
+    "share-success": "Shared."
   },
   "alert": {
     "storage": "There is a problem with the storage space."
