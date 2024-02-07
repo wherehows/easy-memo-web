@@ -5,7 +5,7 @@ import { useStorage } from "@/hooks/useStorage";
 import { ChangeEvent } from "react";
 import { MemoItemProps } from "../MemoItem";
 import toast from "react-hot-toast";
-import { debounce } from "@/utils/helpers";
+import { debounce, postMessage } from "@/utils/helpers";
 
 interface WriteTemplateProps {
   currentMemo: MemoItemProps;
@@ -58,6 +58,22 @@ const WriteTemplate = ({ currentMemo, onWriteMemo }: WriteTemplateProps) => {
         />
         <Header.RightOption
           option={{
+            share:
+              window.platform === "ios"
+                ? {
+                    onClick: () => {
+                      const { title, content } = currentMemo;
+
+                      postMessage("SHARE", {
+                        title:
+                          title ||
+                          content.substring(0, 20) ||
+                          t("except.no-title"),
+                        content: content || t("except.no-content"),
+                      });
+                    },
+                  }
+                : undefined,
             save: {
               onClick: () => {
                 const priorMemoList = memoList.slice(0, -1);

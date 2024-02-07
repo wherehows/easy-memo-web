@@ -2,10 +2,13 @@
 
 import { getURLWithoutDomain, postMessage } from "@/utils/helpers";
 import { LOCALES } from "@/utils/navigation";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const EventHandler = () => {
+  const t = useTranslations();
   const router = useRouter();
 
   useEffect(() => {
@@ -23,6 +26,18 @@ const EventHandler = () => {
             router.back();
             break;
           }
+
+          case "SHARE_SUCCESS": {
+            toast(t("toast.share-success"), {
+              duration: 3000,
+              ariaProps: {
+                role: "status",
+                "aria-live": "polite",
+              },
+            });
+            break;
+          }
+
           default:
             alert(`There is no handler related to type: ${type} data: ${data}`);
         }
@@ -45,7 +60,7 @@ const EventHandler = () => {
         document.removeEventListener("message", handleMessage);
       }
     };
-  }, [router]);
+  }, [router, t]);
 
   return null;
 };
