@@ -21,7 +21,8 @@
   "except": {
     "404": "This page does not exist.",
     "empty": "There are no written memos. Please write a memo.",
-    "no-title": "No title."
+    "no-title": "No title.",
+    "no-content": "No Content."
   },
   "write": {
     "title": "title",
