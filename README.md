@@ -12,6 +12,5 @@ Memo Web for the Visually Impaired
 4. i18n support
 
 ## Planned Additional Features
-1. Login
-2. Filter
-3. Various Theme
+1. Filter
+2. Various Theme
